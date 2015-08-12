@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :active_user, only: [:new, :create]
+  before_action :no_active_user, only: [:destroy]
+
   def new
     @user = User.new
   end
@@ -20,6 +23,6 @@ class SessionsController < ApplicationController
   def destroy
     current_user.reset_session!
     session[:session_token] = nil;
-    redirect_to new_sessions_url
+    redirect_to static_page_url
   end
 end

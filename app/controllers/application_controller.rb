@@ -14,4 +14,13 @@ class ApplicationController < ActionController::Base
     session[:session_token] = user.session_token
     redirect_to user_url(user)
   end
+
+  private
+  def active_user
+    redirect_to static_page_url if current_user
+  end
+
+  def no_active_user
+    redirect_to new_sessions_url unless current_user
+  end
 end

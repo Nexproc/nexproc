@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :active_user, only: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -13,13 +15,8 @@ class UsersController < ApplicationController
     end
   end
 
+  private
   def user_params
     params.require(:user).permit(:username, :password)
-  end
-
-  #chalk up for removal
-  def show
-    @user = current_user
-    render :show
   end
 end
