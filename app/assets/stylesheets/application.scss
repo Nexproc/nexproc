@@ -15,10 +15,4 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-.sign-up {
-  margin: 0 auto;
-  display: block;
-  left: 50%;
-  transform: translateX(-13%);
-}
+@import "custom";

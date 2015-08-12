@@ -1,0 +1,55 @@
+$infocolor: #00d2da;
+$warncolor: #da7500;
+$dangercolor: #da0065;
+
+.form-control.btn:focus {
+  box-shadow: none;
+}
+
+.btn-info {
+  background-color: $infocolor;
+  border-color: darken($infocolor, 10%);
+}
+
+.btn-info:active, .btn-info.active, .btn-info.hover, .btn-info:hover {
+  background-color: darken($infocolor, 10%);
+  border-color: darken($infocolor, 15%);
+}
+
+.btn-info:focus, .btn-info:active:focus, .btn-info:active:focus:hover,
+.btn-info:active:hover {
+  background-color: darken($infocolor, 15%);
+  border-color: darken($infocolor, 20%);
+}
+
+.btn-warn {
+  background-color: $warncolor;
+  border-color: darken($warncolor, 10%);
+}
+
+.btn-warn:active, .btn-warn.active, .btn-warn.hover, .btn-warn:hover {
+  background-color: darken($warncolor, 10%);
+  border-color: darken($warncolor, 15%);
+}
+
+.btn-warn:focus, .btn-warn:active:focus, .btn-warn:active:focus:hover,
+.btn-warn:active:hover {
+  background-color: darken($warncolor, 15%);
+  border-color: darken($warncolor, 20%);
+}
+
+.btn-danger {
+  background-color: $dangercolor;
+  border-color: darken($dangercolor, 10%);
+}
+
+.btn-danger:active, .btn-danger.active, .btn-danger.hover, .btn-danger:hover {
+  background-color: darken($dangercolor, 10%);
+  border-color: darken($dangercolor, 15%);
+}
+
+.btn-danger:focus, .btn-danger:active:focus, .btn-danger:active:focus:hover,
+.btn-danger:active:hover {
+  background-color: darken($dangercolor, 15%);
+  border-color: darken($dangercolor, 20%);
+}
