@@ -5,7 +5,7 @@
         <%= link_to '<div class="btn btn-info">Logout</div>'.html_safe, sessions_url, method: :delete, class: "info-btn" %>
       <% end %>
       <li class='sidebar-brand'><%= current_user.username %></li>
-      <li><%= image_tag 'light-logo.png', class: "logo" %></li>
+      <%= image_tag 'light-logo.png', class: "logo" %>
       <div class="list-group">
         <a href="#" class="list-group-item">Teams</a>
         <a href="#" class="list-group-item">Projects</a>

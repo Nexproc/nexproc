@@ -1,8 +1,10 @@
 @import "color_template";
 
 .sidebar {
+  max-width: 300px;
+  min-width: 200px;
+  height: 100%;
   margin-right: -21px;
-  margin-bottom: 20px;
   margin-left: -20px;
   width: (80.5% * (1 - .805));
   background-color: $maingrey;
@@ -10,4 +12,9 @@
 
 .sidebar .logo {
   width: 100%;
+  padding-bottom: 30%;
+}
+
+html, .whole, #main, #sidebar-wrapper, .container-fluid {
+  height: 100%;
 }
