@@ -1,0 +1,29 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.signup-form-container {
+  margin: 10% auto;
+  display: block;
+  width: 300px;
+  text-align: center;
+}
+
+.unpadded-input-group {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.unpadded-input-group .form-group {
+  margin: 0;
+
+}
+
+.unpadded-input-group .form-control {
+  border-radius: 0;
+}
+
+.unpadded-input-group input {
+  border: none;
+  background-color: transparent;
+}
