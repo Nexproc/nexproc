@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def login!(user)
     user.reset_session!
     session[:session_token] = user.session_token
-    redirect_to static_page_url
+    redirect_to root
   end
 
   private
