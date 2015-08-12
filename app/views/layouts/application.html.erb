@@ -9,10 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body style="background-color: #555555">
-  <%= flash[:errors] if flash[:errors] %>
-  <%if current_user %>
-    <%= link_to "Logout", sessions_url, method: :delete %>
-  <% end %>
+<%= flash[:errors] if flash[:errors] %>
 
 
 <%= yield %>
