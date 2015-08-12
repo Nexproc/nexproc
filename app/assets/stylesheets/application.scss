@@ -15,4 +15,9 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "custom";
+@import "buttons";
+@import "color_template";
+
+.whole {
+  background-color: $subgrey;
+}

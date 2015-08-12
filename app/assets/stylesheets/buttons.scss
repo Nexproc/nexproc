@@ -1,6 +1,4 @@
-$infocolor: #00d2da;
-$warncolor: #da7500;
-$dangercolor: #da0065;
+@import 'color_template';
 
 .form-control.btn:focus {
   box-shadow: none;
