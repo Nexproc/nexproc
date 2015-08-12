@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :password)
   end
 
+  #chalk up for removal
   def show
     @user = current_user
     render :show
