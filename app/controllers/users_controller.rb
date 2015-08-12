@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       login!(@user)
     else
-      flash[:errors] = @user.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end

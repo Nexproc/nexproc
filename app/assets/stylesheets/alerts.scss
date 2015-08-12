@@ -1,0 +1,19 @@
+@import "color_template";
+
+.alert.alert-info {
+  color: white;
+  background-color: opacify($infocolor, .8);
+  border-color: opacify($infocolor, .8)
+}
+
+.alert.alert-warning {
+  color: white;
+  background-color: opacify($warncolor, .8);
+  border-color: opacify($warncolor, .8);
+}
+
+.alert.alert-danger {
+  color: white;
+  background-color: $dangercolor;
+  border-color: opacify($dangercolor, .8);
+}

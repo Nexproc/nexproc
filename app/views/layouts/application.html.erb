@@ -9,7 +9,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="whole">
-<%= flash[:errors] if flash[:errors] %>
+  <% if flash[:errors] %>
+    <div class="alert alert-warning">
+      <% flash[:errors].each_with_index do |error, i| %>
+        <%= "<br>".html_safe if i > 0 %>
+        <%= error %>
+      <% end %>
+    </div>
+  <% end %>
 
 
 <%= yield %>

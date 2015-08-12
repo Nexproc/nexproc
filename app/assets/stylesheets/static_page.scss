@@ -11,6 +11,7 @@
 }
 
 .sidebar-brand {
+  text-align: center;
   color: $subgrey;
   font-weight: bold;
   font-size: 30px;
@@ -23,4 +24,10 @@
 
 html, .whole, #main, #sidebar-wrapper, .container-fluid {
   height: 100%;
+}
+
+.list-group-item.selected {
+  width: 105%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
