@@ -4,8 +4,7 @@ window.Nexproc = {
   Views: {},
   Routers: {},
   initialize: function() {
-  	var $rootEl = $('#content');
-    
+  	var $rootEl = $('#content');  
   }
 };
 
