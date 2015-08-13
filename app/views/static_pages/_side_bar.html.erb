@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="col-sm-3 cold-md-2 sidebar">
+<div class="container-fluid no-pad">
+  <div class="sidebar">
     <ul class='nav nav-sidebar'>
       <% if current_user %>
         <%= link_to '<div class="btn btn-info">Logout</div>'.html_safe, sessions_url, method: :delete, class: "info-btn" %>
@@ -7,7 +7,7 @@
       <li class='sidebar-brand'><%= current_user.username %></li>
       <%= image_tag 'light-logo.png', class: "logo" %>
       <div class="list-group">
-        <a href="#" class="list-group-item team-tab">Teams</a>
+        <a href="#teams" class="list-group-item team-tab">Teams</a>
         <a href="#" class="list-group-item project-tab">Projects</a>
         <a href="#" class="list-group-item task-tab">Tasks</a>
       </div>

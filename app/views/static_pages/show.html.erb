@@ -1,12 +1,17 @@
-<div id='main'>
+<div id='wrapper'>
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
     <%= render 'side_bar' %>
   </div>
   <!-- All Other Content -->
-  <div id='content'>
+  <div id='page-content-wrapper' class='primary'>
     <!-- Main Content -->
-    <div id='main'></div>
+    <div class="container-fluid top-pad">
+      <div class="row">
+        <div class="col-lg-12" id='main-content'>
+        </div>
+      </div>
+    </div>
     <!-- Sub-Content -->
     <div id='sub'></div>
   </div>

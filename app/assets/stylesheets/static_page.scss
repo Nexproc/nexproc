@@ -1,13 +1,16 @@
 @import "color_template";
 
+#sidebar-wrapper{
+  float: left;
+  min-width: 160px;
+  max-width: 240px;
+  width: (.805 * (.195) ) * 100%;
+  box-sizing: border-box;
+}
 .sidebar {
-  max-width: 300px;
-  min-width: 200px;
-  height: 100%;
-  margin-right: -21px;
-  margin-left: -20px;
-  width: (80.5% * (1 - .805));
+  width: 100%;
   background-color: $maingrey;
+  height: 100%;
 }
 
 .sidebar-brand {
@@ -22,7 +25,8 @@
   padding-bottom: 30%;
 }
 
-html, .whole, #main, #sidebar-wrapper, .container-fluid {
+html, .whole, #wrapper, #sidebar-wrapper, .container-fluid,
+.row, #main-content, .panel {
   height: 100%;
 }
 
@@ -30,4 +34,42 @@ html, .whole, #main, #sidebar-wrapper, .container-fluid {
   width: 105%;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+div.container-fluid.no-pad {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#page-content-wrapper {
+  float: left;
+  min-height: 50%;
+  max-height: 100%;
+  width: (.805)*80.5%;
+}
+
+.primary {
+  background-color: $midgrey;
+}
+
+div.container-fluid.top-pad {
+  padding-top: 10px;
+}
+
+.panel-default > div.panel-heading {
+  height: 20%;
+  background-color: $infocolor;
+  border-color: darken($infocolor, 5%);
+}
+
+div.panel.panel-default {
+  border-color: darken($infocolor, 5%)
+}
+
+button.list-group-item {
+  background-color: lighten($infocolor, 50%);
+}
+
+button.list-group-item:hover {
+  background-color: lighten($infocolor, 60%);
 }

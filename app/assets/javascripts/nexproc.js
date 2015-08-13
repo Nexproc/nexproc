@@ -4,7 +4,7 @@ window.Nexproc = {
   Views: {},
   Routers: {},
   initialize: function() {
-    new Nexproc.Routers.router({$rootEl: $('#content')})
+    new Nexproc.Routers.Router({$rootEl: $('#main-content')})
     Backbone.history.start();
   }
 };
