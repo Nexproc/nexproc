@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resource :static_page, only: [:show]
+  namespace :api do
+    resources :teams
+    resources :memberships, only: [:create, :destroy]
+  end
+
   root to: "static_pages#show"
+  resource :static_page, only: [:show]
   resource :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create]
 end

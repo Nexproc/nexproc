@@ -17,10 +17,14 @@ class ApplicationController < ActionController::Base
 
   private
   def active_user
-    redirect_to static_page_url if current_user
+    redirect_to root_url if current_user
   end
 
   def no_active_user
     redirect_to new_sessions_url unless current_user
+  end
+
+  def unprocessable(entity)
+    render json: entity.errors.full_messages, status: 422
   end
 end
