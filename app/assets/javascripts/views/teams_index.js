@@ -10,7 +10,8 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click .add-team': "new_team"
+    'click .add-team': "new_team",
+    'click .leave-team': "leave_team"
   },
 
   new_team: function () {
@@ -19,6 +20,7 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
       model: new Nexproc.Models.Team()
     });
     $('body').append(form.render().$el);
+    this.$('.team-name.form-control').focus();
   },
 
   addTView: function (team) {

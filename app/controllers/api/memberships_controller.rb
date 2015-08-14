@@ -1,6 +1,7 @@
 class Api::MembershipsController < ApplicationController
   def destroy
-    @membership = Membership.find(params[:id]).includes(:team)
+    options = { user_id: current_user.id, team_id: params[:team_id] }
+    @membership = Membership.find_by(options)
     team = @membership.team
     @membership.destroy!
     team.destroy! if team.memberships.size = 0;

@@ -41,6 +41,6 @@ Nexproc.Views.TeamForm = Backbone.View.extend({
   },
 
   onRender: function () {
-    $('.text-field').focus();
+    this.$('.team-name.form-control').focus();
   }
 });

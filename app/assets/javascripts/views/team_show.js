@@ -9,7 +9,7 @@ Nexproc.Views.TeamShow = Backbone.View.extend({
     this.$el.html(this.template({ header: this.model.escape('name') }));
     var $content = this.$('ul');
     this.model.members().each(function(user) {
-      var tView = new MembersIndexView({ model: user });
+      var tView = new MembersIndexItem({ model: user });
       $content.append(tView.render().$el);
     });
 

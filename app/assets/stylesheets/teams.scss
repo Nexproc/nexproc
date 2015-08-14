@@ -1,1 +1,13 @@
+@import 'color_template';
 
+.leave-team {
+  float: right;
+}
+
+.list-group > div > div.button-row.list-group-item > button.btn.btn-default.team-button {
+  height: 100%;
+  width: 96%;
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
