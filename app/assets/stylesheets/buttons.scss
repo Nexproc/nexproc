@@ -50,3 +50,19 @@
   background-color: darken($dangercolor, 15%);
   border-color: darken($dangercolor, 20%);
 }
+
+.btn-success {
+  background-color: $fifth;
+  border-color: darken($fifth, 10%);
+}
+
+.btn-success:active, .btn-success.active, .btn-success.hover, .btn-success:hover {
+  background-color: darken($fifth, 10%);
+  border-color: darken($fifth, 15%);
+}
+
+.btn-success:focus, .btn-success:active:focus, .btn-success:active:focus:hover,
+.btn-success:active:hover {
+  background-color: darken($fifth, 15%);
+  border-color: darken($fifth, 20%);
+}

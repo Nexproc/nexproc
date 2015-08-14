@@ -31,28 +31,6 @@ div.panel.panel-default {
   border-color: darken($infocolor, 5%)
 }
 
-button.glyphicon.glyphicon-plus {
-  color: black;
-  font-size: 30px;
-  background-color: $fifth;
-  border-radius: 8px;
-  height: 45px;
-  width: 45px;
-  float: right;
-  border-top-color: lighten($fifth, 10%);
-  border-left-color: lighten($fifth, 10%);
-  border-bottom-color: darken($fifth, 10%);
-  border-right-color: darken($fifth, 10%);
-}
-
-button.glyphicon.glyphicon-plus:active {
-  border-top-color: darken($fifth, 10%);
-  border-left-color: darken($fifth, 10%);
-  border-bottom-color: lighten($fifth, 10%);
-  border-right-color: lighten($fifth, 10%);
-  outline: none;
-}
-
 div.panel-heading .panel-title {
   font-size: 30px;
   float: left;

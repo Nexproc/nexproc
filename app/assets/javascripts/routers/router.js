@@ -12,6 +12,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   root: function () {
     $('.selected').removeClass('selected');
     this.currentView && this._currentView.remove();
+    this.$rootEl.html(null);
   },
 
   teams_index: function () {

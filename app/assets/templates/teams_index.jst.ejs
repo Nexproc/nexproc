@@ -1,8 +1,16 @@
 
 <!-- Default panel contents -->
 <div class="panel-heading">
-  <div class="panel-title">Teams</div>
-  <button class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+  <div class="panel-title"><%= header %></div>
+  <button class="btn btn-success add-team" data-toggle="modal" data-target="#myModal">Add <%= header %></button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <%= 'modal' %>
+    </div>
+  </div>
 </div>
 
 <!-- List group -->
