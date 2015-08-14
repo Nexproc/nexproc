@@ -1,11 +1,24 @@
 Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
+
   initialize: function () {
     this.collection.fetch();
-    this.listenTo(this.collection, 'sync add delete', this.render);
     this.listenTo(this.collection, 'add', this.addTView);
+    this.listenTo(this.collection, 'sync add delete', this.render);
     this.addChildren();
+  },
+
+  events: {
+    'click .add-team': "new_team"
+  },
+
+  new_team: function () {
+    form = new Nexproc.Views.TeamForm({
+      collection: this.collection,
+      model: new Nexproc.Models.Team()
+    });
+    $('body').append(form.render().$el);
   },
 
   addTView: function (team) {
