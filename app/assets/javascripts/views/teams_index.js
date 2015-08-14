@@ -7,14 +7,13 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({header: this.collection.header}));
+    this.$el.html(this.template({hdr: "Teams", btn_hdr: "Team"}));
     var $content = this.$('ul');
     this.collection.each(function(team) {
       var tView = new Nexproc.Views.TeamsIndexItem({ model: team });
       $content.append(tView.render().$el);
     });
     this.$('.modal-dialog').append(JST['create_team_form']);
-
     return this;
   }
 });

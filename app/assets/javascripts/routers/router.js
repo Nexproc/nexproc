@@ -6,7 +6,8 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '' : 'root',
-    'teams' : 'teams_index'
+    'teams' : 'teams_index',
+    'teams/:id' : 'team_show'
   },
 
   root: function () {
@@ -19,6 +20,11 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     $('.selected').removeClass('selected');
     $('.team-tab').addClass('selected');
     this._switchView(new Nexproc.Views.TeamsIndex({collection: this.teams}));
+  },
+
+  team_show: function (id) {
+    var team = this.teams.getOrFetch(id);
+    this._switchView(new Nexproc.Views.TeamShow({model: team}));
   },
 
   _switchView: function (view) {

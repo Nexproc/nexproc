@@ -1,4 +1,27 @@
 @import 'color_template';
 div.modal-content {
-  background-color: $third;
+  margin-top: 50%;
+  transform: translateY(-50%);
+  background-color: $infocolor;
+}
+
+div.form-input {
+  margin: 0 auto;
+}
+
+.team-name.form-control {
+  float: left;
+  width: 66%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.team-name.btn.btn-success {
+  float: left;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+div.form-input input {
+  color: black;
 }

@@ -1,5 +1,18 @@
 Nexproc.Collections.Teams = Backbone.Collection.extend({
-  header: 'Teams',
   url: '/api/teams',
-  model: Nexproc.Models.Team
+  model: Nexproc.Models.Team,
+
+  getOrFetch: function (id) {
+    var that = this;
+    var team = that.get(id);
+    var cb = function () {};
+
+    if (!team) {
+      team = new Nexproc.Model.Team({id: id});
+      that.add(team);
+    }
+    team.fetch({ error: cb });
+
+    return team;
+  }
 });

@@ -1,15 +1,15 @@
-Nexproc.Views.TeamsIndex = Backbone.View.extend({
-  template: JST['teams_index'],
+Nexproc.Views.TeamShow = Backbone.View.extend({
+  template: JST['team_show'],
   initialize: function () {
     this.collection.fetch();
     this.listenTo(this.collection, 'sync', this.render);
   },
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(this.template({ header: this.model.escape('name') }));
     var $content = this.$('ul');
-    this.collection.each(function(team) {
-      var tView = new TeamsIndexView({ model: team });
+    this.model.members().each(function(user) {
+      var tView = new MembersIndexView({ model: user });
       $content.append(tView.render().$el);
     });
 
