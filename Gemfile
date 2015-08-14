@@ -9,6 +9,7 @@ gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'bcrypt'
 
+gem 'serialize_json-rails'
 gem 'backbone-on-rails'
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets

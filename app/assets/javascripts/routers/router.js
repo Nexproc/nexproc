@@ -2,6 +2,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
     this.teams = new Nexproc.Collections.Teams();
+    this.teams.fetch();
   },
 
   routes: {

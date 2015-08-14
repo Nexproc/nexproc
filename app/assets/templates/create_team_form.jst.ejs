@@ -1,12 +1,22 @@
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Create New Team</h4>
-  </div>
-  <div class="modal-body clearfix">
-    <form class="new-team">
-      <input type="text" class="team-name form-control" name="name" placeholder="New Team Name">
-      <button class="team-name btn btn-success" type="submit">&plus;</button>
-    </form>
+<!-- Modal content-->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create New Team</h4>
+      </div>
+
+      <div class="modal-body clearfix">
+        <form class="new-team">
+          <input type="text" class="team-name form-control"
+          name="team[name]" placeholder="New Team Name">
+          <button class="team-name btn btn-success close" data-dismiss="modal">&plus;</button>
+        </form>
+      </div>
+
+    </div>
+
   </div>
 </div>

@@ -134,6 +134,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    serialize_json-rails (0.0.1)
     spring (1.3.6)
     sprockets (3.3.0)
       rack (~> 1.0)
@@ -171,6 +172,7 @@ DEPENDENCIES
   rename
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  serialize_json-rails
   spring
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
