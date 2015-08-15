@@ -36,9 +36,9 @@ Nexproc.Views.MemberForm = Backbone.View.extend({
     this.model.save(formData, {
       success: function (member) {
         that.team.members().add(member);
-        that.remove();
       }
     });
+    this.remove();
   },
 
   render: function () {

@@ -7,12 +7,15 @@ class Api::MembershipsController < ApplicationController
 
   def create
     @member = User.find_by(username: params[:user][:name])
-    team = Team.find(params[:team_id])
-    team.members << @member
-    if team.save
-      render json: @member
+    if !@member
+      render json: ["This is not the user you are looking for"], status: 404;
     else
-      unprocessable(@member)
+      team = Team.find(params[:team_id])
+      if team.save
+        render json: @member
+      else
+        unprocessable(@member)
+      end
     end
   end
 end
