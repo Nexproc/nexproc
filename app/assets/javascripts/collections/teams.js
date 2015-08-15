@@ -8,7 +8,7 @@ Nexproc.Collections.Teams = Backbone.Collection.extend({
     var cb = function () {};
 
     if (!team) {
-      team = new Nexproc.Model.Team({id: id});
+      team = new Nexproc.Models.Team({id: id});
       that.add(team);
       cb = function () { that.remove(team); };
     }

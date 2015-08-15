@@ -1,6 +1,7 @@
 Nexproc.Routers.Router = Backbone.Router.extend({
   initialize: function(options) {
-    this.$rootEl = options.$rootEl;
+    this.$mainEl = options.$mainEl;
+    this.$subEl = options.$subEl;
     this.teams = new Nexproc.Collections.Teams();
     this.teams.fetch();
   },
@@ -13,24 +14,35 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   root: function () {
     $('.selected').removeClass('selected');
-    this.currentView && this._currentView.remove();
-    this.$rootEl.html(null);
+    this._removeViews();
   },
 
   teams_index: function () {
     $('.selected').removeClass('selected');
     $('.team-tab').addClass('selected');
-    this._switchView(new Nexproc.Views.TeamsIndex({collection: this.teams}));
+    this._switchMainView(new Nexproc.Views.TeamsIndex({collection: this.teams}));
   },
 
   team_show: function (id) {
     var team = this.teams.getOrFetch(id);
-    this._switchView(new Nexproc.Views.TeamShow({model: team}));
+    !this._currentMainView && this.teams_index();
+    this._switchSubView(new Nexproc.Views.TeamShow({model: team}));
   },
 
-  _switchView: function (view) {
-    this._currentView && this._currentView.remove();
-    this._currentView = view;
-    this.$rootEl.html(view.render().$el);
+  _switchSubView: function (view) {
+    this._currentSubView && this._currentSubView.remove();
+    this._currentSubView = view;
+    this.$subEl.html(view.render().$el);
+  },
+
+  _switchMainView: function (view) {
+    this._removeViews();
+    this._currentMainView = view;
+    this.$mainEl.html(view.render().$el);
+  },
+
+  _removeViews: function () {
+    this._currentSubView && this._currentSubView.remove();
+    this._currentMainView && this._currentMainView.remove();
   }
 });
