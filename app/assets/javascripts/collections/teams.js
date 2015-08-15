@@ -10,6 +10,7 @@ Nexproc.Collections.Teams = Backbone.Collection.extend({
     if (!team) {
       team = new Nexproc.Model.Team({id: id});
       that.add(team);
+      cb = function () { that.remove(team); };
     }
     team.fetch({ error: cb });
 

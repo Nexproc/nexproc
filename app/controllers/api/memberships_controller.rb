@@ -1,24 +1,18 @@
 class Api::MembershipsController < ApplicationController
   def destroy
-    options = { user_id: current_user.id, team_id: params[:team_id] }
-    @membership = Membership.find_by(options)
-    team = @membership.team
-    @membership.destroy!
+    team = Team.find(params[:team_id]).members.delete(current_user)
     team.destroy! if team.memberships.size = 0;
     render json: {}
   end
 
   def create
-    @membership = Membership.new(membership_params)
-    if @membership.save
-      render json: @membership
+    @member = User.find_by(username: params[:user][:name])
+    team = Team.find(params[:team_id])
+    team.members << @member
+    if team.save
+      render json: @member
     else
-      unprocessable(@membership)
+      unprocessable(@member)
     end
-  end
-
-  private
-  def membership_params
-    params.require(:membership).permit(:user_id, :team_id)
   end
 end

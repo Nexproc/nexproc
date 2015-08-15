@@ -17,8 +17,8 @@ class Api::TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
+    @team.members << current_user
     if @team.save
-      @membership = Membership.create(team_id: @team.id, user_id: current_user.id)
       render json: @team
     else
       unprocessable(@team)

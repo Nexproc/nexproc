@@ -3,9 +3,4 @@ class StaticPagesController < ApplicationController
 
   def show
   end
-
-  private
-  def be_logged_in
-    redirect_to new_sessions_url unless current_user
-  end
 end

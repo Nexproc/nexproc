@@ -4,14 +4,22 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.collection.fetch();
-    this.listenTo(this.collection, 'add', this.addTView);
-    this.listenTo(this.collection, 'sync add delete', this.render);
-    this.addChildren();
+    this.listenTo(this.collection, 'add', this.addTView.bind(this));
+    this.listenTo(this.collection, 'sync add delete', this.render.bind(this));
+    this.collection.each( this.addTView.bind(this) );
   },
 
   events: {
-    'click .add-team': "new_team",
+    'click .list-group-item': "show_team",
+    'click .add-member': "new_team",
     'click .leave-team': "leave_team"
+  },
+
+  show_team: function (e) {
+    var team = this.collection.getOrFetch($(e.currentTarget).data("id"))
+    var tShow = new Nexproc.Views.TeamShow({model: team});
+    $('#sub.container-fluid.top-pad').empty();
+    $('#sub.container-fluid.top-pad').html(tShow.render().$el);
   },
 
   new_team: function () {
@@ -20,26 +28,20 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
       model: new Nexproc.Models.Team()
     });
     $('body').append(form.render().$el);
-    this.$('.team-name.form-control').focus();
+    this.$('.instance-name.form-control').focus();
   },
 
   addTView: function (team) {
     var tView = new Nexproc.Views.TeamsIndexItem({ model: team });
-    this.addSubview('ul.list-group', tView);
-  },
-
-  addChildren: function () {
-    var that = this;
-    this.collection.each( function (team) {
-      that.addTView(team);
-    });
-
-    var form = new Nexproc.Views.TeamForm({collection: this.collection});
-    this.addSubview('.popout-form', form);
+    this.addSubview('ul#teams.list-group', tView);
   },
 
   render: function () {
-    this.$el.html(this.template({ hdr: "Teams", btn_hdr: "Team" }));
+    this.$el.html(this.template({
+      hdr: "Teams",
+      btn_hdr: "Team",
+      list: "teams"
+     }));
     this.attachSubviews();
     return this;
   }

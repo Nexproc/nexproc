@@ -1,8 +1,9 @@
 @import "color_template";
 
 #sidebar-wrapper{
-  z-index: 1;
+  position: relative;
   float: left;
+  z-index: 1;
   min-width: 160px;
   max-width: 240px;
   width: (.805 * (.195) ) * 100%;

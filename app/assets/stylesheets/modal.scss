@@ -1,6 +1,6 @@
 @import 'color_template';
 div.modal-content {
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   left: 40%;
   top: 30%;
@@ -10,27 +10,27 @@ div.modal-content {
 }
 
 .m-background {
+  z-index: 2;
   background: rgba(92, 88, 88, 0.6);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
 }
 
 div.form-input {
   margin: 0 auto;
 }
 
-.team-name.form-control {
+.instance-name.form-control {
   float: left;
   width: 66%;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.team-name.btn.btn-success {
+.instance-name.btn.btn-success {
   float: left;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
