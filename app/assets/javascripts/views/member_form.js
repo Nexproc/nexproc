@@ -1,16 +1,15 @@
 Nexproc.Views.MemberForm = Backbone.View.extend({
-
   template: JST['modal_name_form'],
 
   events: {
     'submit form': 'addMember',
-    'click .m-background': 'removeSelf',
+    'click .m-background': 'remove',
     'click .close': 'removeBtn'
   },
 
-  removeSelf: function () {
+  remove: function () {
     $(document).off('keyup', this.handleKey.bind(this));
-    this.remove();
+    Backbone.View.prototype.remove.call(this);
   },
 
   initialize: function (options) {
@@ -20,13 +19,13 @@ Nexproc.Views.MemberForm = Backbone.View.extend({
 
   handleKey: function (event) {
     if (event.keyCode === 27) {
-      this.removeSelf();
+      this.remove();
     }
   },
 
   removeBtn: function (event) {
     event.preventDefault();
-    this.removeSelf();
+    this.remove();
   },
 
   addMember: function (event) {
@@ -34,11 +33,10 @@ Nexproc.Views.MemberForm = Backbone.View.extend({
     var that = this;
     var formData = $(event.currentTarget).serializeJSON();
     formData.team_id = that.team.get('id');
-    debugger
     this.model.save(formData, {
       success: function (member) {
         that.team.members().add(member);
-        that.removeSelf();
+        that.remove();
       }
     });
   },
@@ -46,7 +44,8 @@ Nexproc.Views.MemberForm = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template({
       instance: "user",
-      type: "Member"
+      type: "Member",
+      title_text: "Add New Member to " + this.team.escape('name')
     }));
     this.onRender();
     return this;

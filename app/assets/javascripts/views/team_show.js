@@ -14,7 +14,6 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   new_member: function () {
-    debugger
     form = new Nexproc.Views.MemberForm({
       team: this.model,
       model: new Nexproc.Models.Membership()

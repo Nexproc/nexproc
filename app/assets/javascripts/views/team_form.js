@@ -3,13 +3,13 @@ Nexproc.Views.TeamForm = Backbone.View.extend({
 
   events: {
     'submit form': 'createTeam',
-    'click .m-background': 'removeSelf',
+    'click .m-background': 'remove',
     'click .close': 'removeBtn'
   },
 
-  removeSelf: function () {
+  remove: function () {
     $(document).off('keyup', this.handleKey.bind(this));
-    this.remove();
+    Backbone.View.prototype.remove.call(this);
   },
 
   initialize: function () {
@@ -19,13 +19,13 @@ Nexproc.Views.TeamForm = Backbone.View.extend({
 
   handleKey: function (event) {
     if (event.keyCode === 27) {
-      this.removeSelf();
+      this.remove();
     }
   },
 
   removeBtn: function (event) {
     event.preventDefault();
-    this.removeSelf();
+    this.remove();
   },
 
   createTeam: function (event) {
@@ -35,7 +35,7 @@ Nexproc.Views.TeamForm = Backbone.View.extend({
     this.model.save(formData, {
       success: function (team) {
         that.collection.add(team);
-        that.removeSelf();
+        that.remove();
       }
     });
   },
@@ -43,7 +43,8 @@ Nexproc.Views.TeamForm = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template({
       instance: "team",
-      type: "Team"
+      type: "Team",
+      title_text: "Create New Team"
     }));
     this.onRender();
     return this;
