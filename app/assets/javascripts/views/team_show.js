@@ -1,7 +1,7 @@
 Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
-  leaveButton: JST['leave_button'],
+  button: JST['dropdown'],
 
   initialize: function (options) {
     this.mainView = options.mainView;
@@ -39,9 +39,10 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   render: function () {
+    var that = this;
     this.$el.html(this.template({
       hdr: this.model.escape('name'),
-      btn_hdr: "Member",
+      button: that.button(),
       list: "members"
     }));
     this.attachSubviews();

@@ -1,6 +1,7 @@
 Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
+  button: JST['add_team'],
 
   initialize: function () {
     this.collection.fetch();
@@ -35,9 +36,10 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
+    var that = this;
     this.$el.html(this.template({
       hdr: "Teams",
-      btn_hdr: "Team",
+      button: that.button(),
       list: "teams"
      }));
     this.attachSubviews();
