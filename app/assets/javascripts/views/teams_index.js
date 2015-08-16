@@ -18,10 +18,6 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   show_team: function (e) {
     var url = 'teams/' + $(e.currentTarget).data("id");
     Backbone.history.navigate(url, {trigger: true});
-    // var team = this.collection.getOrFetch($(e.currentTarget).data("id"))
-    // var tShow = new Nexproc.Views.TeamShow({model: team});
-    // $('#sub.container-fluid.top-pad').empty();
-    // $('#sub.container-fluid.top-pad').html(tShow.render().$el);
   },
 
   new_team: function (e) {
