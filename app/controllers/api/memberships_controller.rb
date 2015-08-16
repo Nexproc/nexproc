@@ -1,8 +1,11 @@
 class Api::MembershipsController < ApplicationController
   def destroy
-    team = Team.find(params[:team_id]).members.delete(current_user)
-    team.destroy! if team.memberships.size = 0;
-    render json: {}
+    print "PARAMS: "
+    p params
+    team = Team.find(params[:id])
+    team.members.delete(current_user)
+    team.destroy! if team.members.size == 0;
+    render json: "destructificated"
   end
 
   def create

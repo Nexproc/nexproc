@@ -1,11 +1,14 @@
 Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
+  leaveButton: JST['leave_button'],
 
-  initialize: function () {
+  initialize: function (options) {
+    this.mainView = options.mainView;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.members(), 'add', this.addMemView);
-    this.model.members().each( this.addMemView.bind(this));
+    this.listenTo(this.model.members(), 'destroy', this.remove);
+    this.model.members().each( this.addMemView.bind(this) );
   },
 
   events: {
@@ -27,6 +30,14 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.addSubview('ul#members.list-group', tView);
   },
 
+  leave_team: function (e) {
+    var that = this;
+    var params = { team_id: this.model.id };
+    this.model.members().destroy(this.model.id);
+    that.mainView.removeModelSubview('ul#teams.list-group', that.model);
+    this.remove();
+  },
+
   render: function () {
     this.$el.html(this.template({
       hdr: this.model.escape('name'),
@@ -34,6 +45,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
       list: "members"
     }));
     this.attachSubviews();
+    this.$('.buttons').append( this.leaveButton );
     return this;
   }
 });

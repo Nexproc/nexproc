@@ -26,7 +26,8 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   team_show: function (id) {
     var team = this.teams.getOrFetch(id);
     !this._currentMainView && this.teams_index();
-    this._switchSubView(new Nexproc.Views.TeamShow({model: team}));
+    var options = { mainView: this._currentMainView, model: team };
+    this._switchSubView(new Nexproc.Views.TeamShow(options));
   },
 
   _switchSubView: function (view) {
