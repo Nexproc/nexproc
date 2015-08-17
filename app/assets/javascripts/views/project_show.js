@@ -39,6 +39,7 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     this.model.destroy();
     this.mainView.removeModelSubview('ul#projects.list-group', that.model);
     this.remove();
+    Backbone.history.navigate('projects');
   },
 
   // show_members: function () {

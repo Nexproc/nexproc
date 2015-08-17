@@ -9,7 +9,11 @@ class Api::ProjectsController < ApplicationController
   def show
     #TODO: include tasks once they are created
     @project = Project.find(params[:id])
-    render json: :show
+    if @project && current_user.projects.include?(@project)
+      render json: :show
+    else
+      render json: "This is not the project you are looking for", status: 404
+    end
   end
 
   def create

@@ -29,7 +29,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     var form = new Nexproc.Views.ProjectForm({
       team: this.model,
       model: new Nexproc.Models.Project(),
-      collection: this.team.projects()
+      collection: this.model.projects()
     });
     form.render();
   },
@@ -38,7 +38,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     var form = new Nexproc.Views.MemberForm({
       team: this.model,
       model: new Nexproc.Models.Membership(),
-      collection: this.team.members()
+      collection: this.model.members()
     });
     form.render();
   },
