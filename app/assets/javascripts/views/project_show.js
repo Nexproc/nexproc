@@ -10,7 +10,7 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     this.mainView = options.mainView;
     this.listenTo(this.model, 'sync', this.render);
     // this.listenTo(this.model.tasks(), 'add', this.addTaskView);
-    this.addChildren();
+    // this.addChildren();
   },
 
   preRender: function () {
@@ -34,7 +34,6 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
   // },
 
   delete_project: function () {
-    debugger
     var that = this;
     this.model.collection.remove(this.model);
     this.model.destroy();
