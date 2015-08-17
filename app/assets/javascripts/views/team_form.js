@@ -1,13 +1,12 @@
 Nexproc.Views.TeamForm = Backbone.ModalFormView.extend({
-  template: JST['modal_name_form'],
+  template: JST['modals/modal_body'],
 
   initialize: function () {
     this.model = new Nexproc.Models.Team();
   },
 
   templateOptions: {
-    instance: "team",
-    type: "Team",
-    title_text: "Create New Team"
+    title_text: "Create New Team",
+    modal_content: JST['modals/modal_team_form']()
   }
 });

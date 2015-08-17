@@ -1,17 +1,17 @@
 class Api::TeamsController < ApplicationController
+  before_action :no_active_user
   def index
     @teams = current_user.teams
     render json: @teams
   end
 
   def show
-    #TODO: Include Projects Once Created
-    @team = Team.includes(:members).find(params[:id])
+    @team = Team.includes(:members, :projects).find(params[:id])
 
     if @team && @team.members.include?(current_user)
       render :show
     else
-      render json: ["This is not the team you are looking for."], status: 403
+      render json: "This is not the team you are looking for.", status: 403
     end
   end
 
@@ -26,18 +26,12 @@ class Api::TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:id])
-    if @team.save
+    @team = Team.find(params[:team][:id])
+    if @team.update(team_params)
       render json: @team
     else
       unprocessable(@team)
     end
-  end
-
-  def destroy
-    @team = Team.find(params[:id])
-    @team.destroy!
-    render json: {}
   end
 
   private

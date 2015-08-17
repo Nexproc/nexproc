@@ -3,13 +3,20 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     this.$mainEl = options.$mainEl;
     this.$subEl = options.$subEl;
     this.teams = new Nexproc.Collections.Teams();
+    this.projects = new Nexproc.Collections.Projects();
+    //this.tasks = new Nexpoc.Collections.Tasks();
     this.teams.fetch();
+    this.projects.fetch();
+    //this.tasks.fetch();
   },
 
   routes: {
     '' : 'root',
     'teams' : 'teams_index',
-    'teams/:id' : 'team_show'
+    'teams/:id' : 'team_show',
+    'teams/:id/projects' : 'team_projects_index',
+    'projects' : 'projects_index',
+    'projects/:id': 'projects_show'
   },
 
   root: function () {

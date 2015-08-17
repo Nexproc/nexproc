@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships
+  has_many :projects, through: :teams
 
   attr_reader :password
   before_validation :create_session_token
@@ -8,10 +9,9 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :username,  length: { minimum: 6, maximum: 16 }, uniqueness: true
 
-  def self.find_by_credentials(username="", password="")
+  def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
-    return nil unless user
-    return user.is_password?(password) ? user : nil
+    return user && user.is_password?(password) ? user : nil
   end
 
   def create_session_token

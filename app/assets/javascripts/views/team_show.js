@@ -1,19 +1,35 @@
 Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
-  button: JST['dropdown'],
+  templateOptions: {
+    list: "projects",
+    button: JST['dropdown']()
+  },
 
   initialize: function (options) {
     this.mainView = options.mainView;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.members(), 'add', this.addMemView);
-    this.listenTo(this.model.members(), 'destroy', this.remove);
-    this.model.members().each( this.addMemView.bind(this) );
+    this.listenTo(this.model.projects(), 'add', this.addProjView);
+    this.addChildren();
+  },
+
+  preRender: function () {
+      this.templateOptions.header = this.model.escape('name');
   },
 
   events: {
+    'click .create-project': 'new_project',
     'click .add-member': "new_member",
     'click .leave-team': "leave_team"
+  },
+
+  new_project: function () {
+    form = new Nexproc.Views.ProjectForm({
+      team: this.model,
+      model: new Nexproc.Models.Project()
+    });
+    form.render();
   },
 
   new_member: function () {
@@ -21,13 +37,22 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
       team: this.model,
       model: new Nexproc.Models.Membership()
     });
-    $('body').append(form.render().$el);
-    this.$('.instance-name.form-control').focus();
+    form.render();
+  },
+
+  addChildren: function () {
+    this.model.members().each( this.addMemView.bind(this) );
+    this.model.projects().each( this.addProjView.bind(this) );
   },
 
   addMemView: function (member) {
     var tView = new Nexproc.Views.MembersIndexItem({ model: member });
     this.addSubview('ul#members.list-group', tView);
+  },
+
+  addProjView: function (project) {
+    var pView = new Nexproc.Views.ProjectsIndexItem({ model: project });
+    this.addSubview('ul#projects.list-group', pView);
   },
 
   leave_team: function (e) {
@@ -36,17 +61,5 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.model.members().destroy(this.model.id);
     that.mainView.removeModelSubview('ul#teams.list-group', that.model);
     this.remove();
-  },
-
-  render: function () {
-    var that = this;
-    this.$el.html(this.template({
-      hdr: this.model.escape('name'),
-      button: that.button(),
-      list: "members"
-    }));
-    this.attachSubviews();
-    this.$('.buttons').append( this.leaveButton );
-    return this;
   }
 });

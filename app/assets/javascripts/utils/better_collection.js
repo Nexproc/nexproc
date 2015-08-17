@@ -6,7 +6,7 @@ Backbone.Collection = Backbone.Collection.extend({
     var targetModel = that.get(id);
 
     // set up dummy function in case no callback is needed
-    var errorCallback = function () { };
+    var errorCallback = function () {};
 
     if (!targetModel) {
       // generates a new instance of the model specified in your colleciton

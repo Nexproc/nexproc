@@ -2,7 +2,7 @@
   <div class="sidebar">
     <ul class='nav nav-sidebar'>
       <% if current_user %>
-        <%= link_to '<div class="btn btn-info">Logout</div>'.html_safe, sessions_url, method: :delete, class: "info-btn" %>
+        <%= link_to '<div class="btn btn-info logout">Logout</div>'.html_safe, sessions_url, method: :delete %>
       <% end %>
       <li class='sidebar-brand'><%= current_user.username %></li>
       <%= image_tag 'light-logo.png', class: "logo" %>

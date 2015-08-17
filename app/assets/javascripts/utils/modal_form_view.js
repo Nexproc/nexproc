@@ -1,6 +1,4 @@
 Backbone.ModalFormView = Backbone.View.extend ({
-  templateOptions: {},
-
   events: {
     'submit form': 'createItem',
     'click .m-background': 'remove',
@@ -35,9 +33,13 @@ Backbone.ModalFormView = Backbone.View.extend ({
     this.remove();
   },
 
-  render: function () {
+  preRender: function () {
+    $('body .modal-content') && $('body .modal-content').remove();
     $(document).on('keyup', this.handleKey.bind(this));
-    this.$el.html(this.template(this.templateOptions));
-    return this;
+  },
+
+  postRender: function () {
+    $('body').append(this.$el);
+    this.$('.instance-name.form-control').focus();
   }
 });

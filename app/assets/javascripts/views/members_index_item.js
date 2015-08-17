@@ -3,9 +3,6 @@ Nexproc.Views.MembersIndexItem = Backbone.View.extend({
   className: "list-group-item",
   initialize: function () {
     this.listenTo(this.model, 'sync', this.render);
-  },
-  render: function () {
-    this.$el.html(this.template({ user: this.model }));
-    return this;
+    this.templateOptions.user = this.model;
   }
 });
