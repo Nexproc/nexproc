@@ -29,6 +29,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   // team routes
   teamsIndex: function () {
+    this.teams.fetch();
     $('.selected').removeClass('selected');
     $('.team-tab').addClass('selected');
     this._switchMainView(new Nexproc.Views.TeamsIndex({ collection: this.teams }));
@@ -58,8 +59,9 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   projectsIndex: function () {
     $('.selected').removeClass('selected');
     $('.project-tab').addClass('selected');
-    var pView = new Nexproc.Views.ProjectsIndex({ collection: this.projects });
-    this._switchMainView(pView);
+    this.projects.fetch();
+    var pVDex = new Nexproc.Views.ProjectsIndex({ collection: this.projects });
+    this._switchMainView(pVDex);
   },
 
   projectShow: function (id, keepView) {
