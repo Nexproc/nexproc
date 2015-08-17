@@ -4,8 +4,12 @@ Nexproc.Views.TeamsIndexItem = Backbone.View.extend({
     this.listenTo(this.model, 'sync', this.render);
   },
 
-  render: function () {
-    this.$el.html(this.template({team: this.model}));
-    return this;
+  preRender: function () {
+    this.templateOptions.team = this.model;
   }
+  //
+  // render: function () {
+  //   this.$el.html(this.template({team: this.model}));
+  //   return this;
+  // }
 });

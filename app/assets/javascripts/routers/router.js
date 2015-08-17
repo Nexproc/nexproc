@@ -18,12 +18,12 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     'projects' : 'projects_index',
     'projects/:id': 'projects_show'
   },
-
   root: function () {
     $('.selected').removeClass('selected');
     this._removeViews();
   },
 
+  // team routes
   teams_index: function () {
     $('.selected').removeClass('selected');
     $('.team-tab').addClass('selected');
@@ -36,6 +36,23 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     var options = { mainView: this._currentMainView, model: team };
     this._switchSubView(new Nexproc.Views.TeamShow(options));
   },
+
+  // project routes
+  projects_index: function () {
+    $('.selected').removeClass('selected');
+    $('.project-tab').addClass('selected');
+    var pView = new Nexproc.Views.ProjectsIndex({ collection: this.projects });
+    this._switchMainView(pView);
+  },
+
+  projects_show: function (id) {
+    var project = this.projects.getOrFetch(id);
+    !this._currentMainView && this.projects_index();
+    var options = { mainView: this._currentMainView, model: project };
+    this._switchSubView(new Nexproc.Views.ProjectShow(options));
+  },
+
+  // TODO: tasks routes
 
   _switchSubView: function (view) {
     this._currentSubView && this._currentSubView.remove();

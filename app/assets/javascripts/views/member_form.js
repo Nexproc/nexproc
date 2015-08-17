@@ -7,7 +7,6 @@ Nexproc.Views.MemberForm = Backbone.ModalFormView.extend({
 
   initialize: function (options) {
     this.team = options.team;
-    this.collection = this.team.members();
   },
 
   formHelper: function (formData) {

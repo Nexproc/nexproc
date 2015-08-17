@@ -7,11 +7,9 @@ Nexproc.Views.ProjectForm = Backbone.ModalFormView.extend({
 
   initialize: function (options) {
     this.team = options.team;
-    this.collection = this.team.projects();
   },
 
   formHelper: function (formData) {
-    debugger
     formData.project.team_id = this.team.get('id');
   }
 });

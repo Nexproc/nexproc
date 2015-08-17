@@ -3,7 +3,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   className: "panel panel-default",
   templateOptions: {
     list: "projects",
-    button: JST['dropdown']()
+    button: JST['team_dropdown']()
   },
 
   initialize: function (options) {
@@ -15,29 +15,39 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   preRender: function () {
-      this.templateOptions.header = this.model.escape('name');
+    this.templateOptions.header = this.model.escape('name');
   },
 
   events: {
+    'click .view-members' : 'show_members',
     'click .create-project': 'new_project',
     'click .add-member': "new_member",
     'click .leave-team': "leave_team"
   },
 
   new_project: function () {
-    form = new Nexproc.Views.ProjectForm({
+    var form = new Nexproc.Views.ProjectForm({
       team: this.model,
-      model: new Nexproc.Models.Project()
+      model: new Nexproc.Models.Project(),
+      collection: this.team.projects()
     });
     form.render();
   },
 
   new_member: function () {
-    form = new Nexproc.Views.MemberForm({
+    var form = new Nexproc.Views.MemberForm({
       team: this.model,
-      model: new Nexproc.Models.Membership()
+      model: new Nexproc.Models.Membership(),
+      collection: this.team.members()
     });
     form.render();
+  },
+
+  show_members: function () {
+    var modal = new Nexproc.Views.TeamMembersModal({
+      team: this.model,
+      collection: this.model.members()
+    });
   },
 
   addChildren: function () {
@@ -59,7 +69,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     var that = this;
     var params = { team_id: this.model.id };
     this.model.members().destroy(this.model.id);
-    that.mainView.removeModelSubview('ul#teams.list-group', that.model);
+    this.mainView.removeModelSubview('ul#teams.list-group', that.model);
     this.remove();
   }
 });

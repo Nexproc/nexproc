@@ -30,6 +30,10 @@ Backbone.ModalFormView = Backbone.View.extend ({
         this.collection.add(member);
       }.bind(this)
     });
+    this.postCreate();
+  },
+
+  postCreate: function () {
     this.remove();
   },
 
