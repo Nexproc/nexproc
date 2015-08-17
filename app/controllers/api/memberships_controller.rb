@@ -12,6 +12,7 @@ class Api::MembershipsController < ApplicationController
       render json: "This is not the user you are looking for", status: 404;
     else
       team = Team.find(params[:team_id])
+      team.members << @member
       if team.save
         render json: @member
       else

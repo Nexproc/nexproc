@@ -33,13 +33,18 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
   //   form.render();
   // },
 
-  delete_project: function () {
-    var that = this;
+  delete_project: function (e) {
     this.model.collection.remove(this.model);
     this.model.destroy();
-    this.mainView.removeModelSubview('ul#projects.list-group', that.model);
+    this.mainView && this.removeFromMainView();
     this.remove();
-    Backbone.history.navigate('projects');
+    var url = Backbone.history.fragment.split("/").slice(0, -1).join("/");
+    Backbone.history.navigate(url);
+  },
+
+  removeFromMainView: function () {
+    var that = this;
+    this.mainView.removeModelSubview('ul#projects.list-group', that.model);
   },
 
   // show_members: function () {
@@ -54,10 +59,10 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     // this.model.tasks().each( this.addTaskView.bind(this) );
   },
 
-  // addMemView: function (member) {
-  //   var mView = new Nexproc.Views.MembersIndexItem({ model: member });
-  //   this.addSubview('ul#members.list-group', mView);
-  // },
+  addMemView: function (member) {
+    var mView = new Nexproc.Views.MembersIndexItem({ model: member });
+    this.addSubview('ul#members.list-group', mView);
+  },
 
   addTaskView: function (task) {
     var tView = new Nexproc.Views.TasksIndexItem({ model: task });

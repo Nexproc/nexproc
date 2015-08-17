@@ -7,7 +7,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.mainView = options.mainView;
+    this.mainView = options.mainView ? options.mainView : this;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.members(), 'add', this.addMemView);
     this.listenTo(this.model.projects(), 'add', this.addProjView);
@@ -37,7 +37,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   new_member: function () {
     var form = new Nexproc.Views.MemberForm({
       team: this.model,
-      model: new Nexproc.Models.Membership(),
+      model: new Nexproc.Models.Member(),
       collection: this.model.members()
     });
     form.render();
@@ -71,5 +71,6 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.model.members().destroy(this.model.id);
     this.mainView.removeModelSubview('ul#teams.list-group', that.model);
     this.remove();
+    Backbone.history.navigate('/teams');
   }
 });

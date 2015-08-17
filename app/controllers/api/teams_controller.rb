@@ -6,7 +6,7 @@ class Api::TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.includes(:members, :projects).find(params[:id])
+    @team = Team.find(params[:id])
 
     if @team && @team.members.include?(current_user)
       render :show

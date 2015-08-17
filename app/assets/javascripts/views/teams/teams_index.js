@@ -9,8 +9,7 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.collection.fetch();
-    this.listenTo(this.collection, 'add', this.addTView.bind(this));
-    this.listenTo(this.collection, 'sync', this.render.bind(this));
+    this.listeners();
     this.collection.each( this.addTView.bind(this) );
   },
 
@@ -18,6 +17,12 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
     'click .list-group-item': "show_team",
     'click .add-team': "new_team",
     'click .leave-team': "leave_team"
+  },
+
+  listeners: function () {
+    this.listenTo(this.collection, 'remove', this.removeTView.bind(this));
+    this.listenTo(this.collection, 'add', this.addTView.bind(this));
+    this.listenTo(this.collection, 'sync', this.render.bind(this));
   },
 
   show_team: function (e) {
@@ -36,5 +41,9 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   addTView: function (team) {
     var tView = new Nexproc.Views.TeamsIndexItem({ model: team });
     this.addSubview('ul#teams.list-group', tView);
+  },
+
+  removeTView: function (team) {
+    this.removeModelSubview('ul#teams.list-group', team);
   }
 });

@@ -12,45 +12,75 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   routes: {
     '' : 'root',
-    'teams' : 'teams_index',
-    'teams/:id' : 'team_show',
-    'teams/:id/projects' : 'team_projects_index',
-    'projects' : 'projects_index',
-    'projects/:id': 'projects_show'
+    'teams' : 'teamsIndex',
+    'teams/:id' : 'teamShow',
+    'teams/:id/projects' : 'teamProjectsIndex',
+    'teams/:id/projects/:id' : 'teamProjectShow',
+    'projects' : 'projectsIndex',
+    'projects/:id': 'projectShow',
+    'projects/:id/tasks': 'projectsTaskIndex',
+    'projects/:id/tasks/:id': 'projectsTaskIndex'
   },
+
   root: function () {
     $('.selected').removeClass('selected');
     this._removeViews();
   },
 
   // team routes
-  teams_index: function () {
+  teamsIndex: function () {
     $('.selected').removeClass('selected');
     $('.team-tab').addClass('selected');
-    this._switchMainView(new Nexproc.Views.TeamsIndex({collection: this.teams}));
+    this._switchMainView(new Nexproc.Views.TeamsIndex({ collection: this.teams }));
   },
 
-  team_show: function (id) {
+  teamShow: function (id, keepView) {
     var team = this.teams.getOrFetch(id);
-    !this._currentMainView && this.teams_index();
+    this._subViewHelper(keepView, this.teamsIndex);
     var options = { mainView: this._currentMainView, model: team };
     this._switchSubView(new Nexproc.Views.TeamShow(options));
   },
 
+  // team projects index routes
+
+  teamProjectsIndex: function (id) {
+    var team = this.teams.getOrFetch(id);
+    $('.selected').removeClass('selected');
+    this._switchMainView(new Nexproc.Views.TeamProjectsIndex({ model: team }));
+  },
+
+  teamProjectShow: function (team_id, project_id) {
+    this._subViewHelper(true, this.teamProjectsIndex.bind(this, team_id));
+    this.projectShow(project_id, true);
+  },
+
   // project routes
-  projects_index: function () {
+  projectsIndex: function () {
     $('.selected').removeClass('selected');
     $('.project-tab').addClass('selected');
     var pView = new Nexproc.Views.ProjectsIndex({ collection: this.projects });
     this._switchMainView(pView);
   },
 
-  projects_show: function (id) {
+  projectShow: function (id, keepView) {
     var project = this.projects.getOrFetch(id);
-    !this._currentMainView && this.projects_index();
+    this._subViewHelper(keepView, this.projectsIndex);
     var options = { mainView: this._currentMainView, model: project };
     this._switchSubView(new Nexproc.Views.ProjectShow(options));
   },
+
+  // project tasks index routes
+
+  projectTasksIndex: function (id) {
+    var project = this.projects.getOrFetch(id);
+    $('.selected').removeClass('selected');
+    this._switchMainView(new Nexproc.Views.ProjectsIndex({ model: project }));
+  },
+
+  // projectTaskShow: function (project_id, task_id) {
+  //   this._subViewHelper(true, this.projectsTasksIndex.bind(this, team_id));
+  //   this.taskShow(task_id, true);
+  // },
 
   // TODO: tasks routes
 
@@ -69,5 +99,9 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   _removeViews: function () {
     this._currentSubView && this._currentSubView.remove();
     this._currentMainView && this._currentMainView.remove();
+  },
+
+  _subViewHelper: function (keepView, callback) {
+    !this._currentMainView ? callback.call(this) : !keepView && callback.call(this);
   }
 });
