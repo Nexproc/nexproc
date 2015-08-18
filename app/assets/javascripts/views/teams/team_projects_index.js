@@ -8,10 +8,14 @@ Nexproc.Views.TeamProjectsIndex = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.collection = this.model.projects();
-    this.listenTo(this.collection, 'remove', this.removePView.bind(this));
+    this.listenTo(this.collection, 'remove', this.removeProject);
     this.listenTo(this.collection, 'add', this.addPView.bind(this));
     this.listenTo(this.model, 'sync', this.render);
     this.collection.each( this.addPView.bind(this) );
+  },
+
+  removeProject: function (project) {
+    this.removeModelSubview('ul#projects.list-group', project);
   },
 
   events: {
@@ -36,11 +40,6 @@ Nexproc.Views.TeamProjectsIndex = Backbone.CompositeView.extend({
   addPView: function (project) {
     var pView = new Nexproc.Views.ProjectsIndexItem({ model: project });
     this.addSubview('ul#projects.list-group', pView);
-  },
-
-  removePView: function (project) {
-    debugger
-    this.removeModelSubview('ul#projects.list-group', project);
   },
 
   preRender: function () {

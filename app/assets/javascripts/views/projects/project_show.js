@@ -7,20 +7,27 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.mainView = options.mainView;
     this.listenTo(this.model, 'sync', this.render);
     // this.listenTo(this.model.tasks(), 'add', this.addTaskView);
     // this.addChildren();
   },
 
   preRender: function () {
-    this.templateOptions.header = this.model.escape('name');
+    var head = "<a>" + this.model.escape('name') + "</a>";
+    this.templateOptions.header = head
   },
 
   events: {
     // 'click .view-members' : 'show_members',
     // 'click .add-task': "new_task",
+    'click .panel-title a' : 'showPage',
     'click .delete-project': "delete_project"
+  },
+
+  showPage: function (e) {
+    e.preventDefault();
+    var url = Backbone.history.fragment + "/tasks";
+    Backbone.history.navigate(url, { trigger: true });
   },
 
   // TODO: Create Tasks
@@ -36,15 +43,9 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
   delete_project: function (e) {
     this.model.collection.remove(this.model);
     this.model.destroy();
-    this.mainView && this.removeFromMainView();
     this.remove();
     var url = Backbone.history.fragment.split("/").slice(0, -1).join("/");
     Backbone.history.navigate(url);
-  },
-
-  removeFromMainView: function () {
-    var that = this;
-    this.mainView.removeModelSubview('ul#projects.list-group', that.model);
   },
 
   // show_members: function () {

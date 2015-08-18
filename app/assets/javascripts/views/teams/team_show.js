@@ -11,21 +11,34 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.members(), 'add', this.addMemView);
     this.listenTo(this.model.projects(), 'add', this.addProjView);
+    this.listenTo(this.model.projects(), 'remove', this.removeProject);
     this.addChildren();
   },
 
+  removeProject: function (project) {
+    this.removeModelSubview('ul#projects.list-group', project);
+  },
+
   preRender: function () {
-    this.templateOptions.header = this.model.escape('name');
+    var head = "<a>" + this.model.escape('name') + "</a>";
+    this.templateOptions.header = head;
+  },
+
+  showPage: function (e) {
+    e.preventDefault();
+    var url = Backbone.history.fragment + "/projects";
+    Backbone.history.navigate(url, { trigger: true });
   },
 
   events: {
-    'click .view-members' : 'show_members',
-    'click .create-project': 'new_project',
-    'click .add-member': "new_member",
-    'click .leave-team': "leave_team"
+    'click .panel-title a' : 'showPage',
+    'click .view-members' : 'showMembers',
+    'click .create-project': 'newProject',
+    'click .add-member': "newMember",
+    'click .leave-team': "leaveTeam"
   },
 
-  new_project: function () {
+  newProject: function () {
     var form = new Nexproc.Views.ProjectForm({
       team: this.model,
       model: new Nexproc.Models.Project(),
@@ -34,7 +47,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     form.render();
   },
 
-  new_member: function () {
+  newMember: function () {
     var form = new Nexproc.Views.MemberForm({
       team: this.model,
       model: new Nexproc.Models.Member(),
@@ -43,7 +56,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     form.render();
   },
 
-  show_members: function () {
+  showMembers: function () {
     var modal = new Nexproc.Views.TeamMembersModal({
       team: this.model,
       collection: this.model.members()
@@ -65,7 +78,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.addSubview('ul#projects.list-group', pView);
   },
 
-  leave_team: function (e) {
+  leaveTeam: function (e) {
     var that = this;
     var params = { team_id: this.model.id };
     this.model.members().destroy(this.model.id);

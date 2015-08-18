@@ -38,7 +38,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   teamShow: function (id, keepView) {
     var team = this.teams.getOrFetch(id);
     this._subViewHelper(keepView, this.teamsIndex);
-    var options = { mainView: this._currentMainView, model: team };
+    var options = { model: team };
     this._switchSubView(new Nexproc.Views.TeamShow(options));
   },
 
@@ -48,11 +48,15 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     var team = this.teams.getOrFetch(id);
     $('.selected').removeClass('selected');
     this._switchMainView(new Nexproc.Views.TeamProjectsIndex({ model: team }));
+    return team;
   },
 
   teamProjectShow: function (team_id, project_id) {
     this._subViewHelper(true, this.teamProjectsIndex.bind(this, team_id));
-    this.projectShow(project_id, true);
+    var team = this._currentMainView.model;
+    var project = team.projects().getOrFetch(project_id);
+    var options = { model: project };
+    this._switchSubView(new Nexproc.Views.ProjectShow(options));
   },
 
   // project routes
@@ -67,7 +71,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   projectShow: function (id, keepView) {
     var project = this.projects.getOrFetch(id);
     this._subViewHelper(keepView, this.projectsIndex);
-    var options = { mainView: this._currentMainView, model: project };
+    var options = { model: project };
     this._switchSubView(new Nexproc.Views.ProjectShow(options));
   },
 
@@ -103,7 +107,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     this._currentMainView && this._currentMainView.remove();
   },
 
-  _subViewHelper: function (keepView, callback) {
-    !this._currentMainView ? callback.call(this) : !keepView && callback.call(this);
+  _subViewHelper: function (keepView, cback) {
+    !this._currentMainView ? cback.call(this) : !keepView && cback.call(this);
   }
 });

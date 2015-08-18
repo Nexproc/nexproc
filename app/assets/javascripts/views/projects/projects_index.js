@@ -11,7 +11,12 @@ Nexproc.Views.ProjectsIndex = Backbone.CompositeView.extend({
     this.collection.fetch();
     this.listenTo(this.collection, 'add', this.addPView.bind(this));
     this.listenTo(this.collection, 'sync', this.render.bind(this));
+    this.listenTo(this.collection, 'remove', this.removeProject);
     this.collection.each( this.addPView.bind(this) );
+  },
+
+  removeProject: function (project) {
+    this.removeModelSubview('ul#projects.list-group', project);
   },
 
   events: {
