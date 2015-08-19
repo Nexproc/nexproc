@@ -27,4 +27,9 @@ class ApplicationController < ActionController::Base
   def unprocessable(entity)
     render json: entity.errors.full_messages, status: 422
   end
+
+  def error404(object)
+    errstring = "This is not the " + object + "you were looking for."
+    render json: errstring, status: 404
+  end
 end

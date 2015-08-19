@@ -2,7 +2,7 @@ Nexproc.Views.TeamsIndex = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
   templateOptions: {
-    header: "Teams",
+    header: "Your Teams",
     list: "teams",
     button: JST['add_team']()
   },

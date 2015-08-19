@@ -8,12 +8,13 @@
   max-width: 240px;
   width: (.805 * (.195) ) * 100%;
   box-sizing: border-box;
-  box-shadow: 0px 0px 10px #888888;
+  box-shadow: 0px 0px 10px $shadowgrey;
 }
 .sidebar{
   width: 100%;
   background-color: $maingrey;
   height: 100%;
+  z-index: 1;
 }
 
 .sidebar-brand {
@@ -37,4 +38,8 @@ html, .whole, #wrapper, #sidebar-wrapper, .container-fluid,
   width: 105%;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.background-texture {
+  background-image: $honeyback;
 }

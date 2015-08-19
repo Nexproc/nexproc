@@ -21,6 +21,10 @@
   background-color: $subgrey;
 }
 
+.whole::after {
+  background-image: $honeyback;
+}
+
 *:focus {
   outline: none;
 }

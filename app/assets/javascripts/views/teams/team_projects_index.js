@@ -43,6 +43,7 @@ Nexproc.Views.TeamProjectsIndex = Backbone.CompositeView.extend({
   },
 
   preRender: function () {
-    this.templateOptions.header = this.model.escape('name');
+    var head = this.model.escape('name') + " Projects";
+    this.templateOptions.header = head;
   }
 });

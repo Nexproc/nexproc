@@ -4,10 +4,10 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     this.$subEl = options.$subEl;
     this.teams = new Nexproc.Collections.Teams();
     this.projects = new Nexproc.Collections.Projects();
-    //this.tasks = new Nexpoc.Collections.Tasks();
-    this.teams.fetch();
-    this.projects.fetch();
-    //this.tasks.fetch();
+    this.tasks = new Nexproc.Collections.Tasks();
+    // this.teams.fetch();
+    // this.projects.fetch();
+    // this.tasks.fetch();
   },
 
   routes: {
@@ -18,8 +18,10 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     'teams/:id/projects/:id' : 'teamProjectShow',
     'projects' : 'projectsIndex',
     'projects/:id': 'projectShow',
-    'projects/:id/tasks': 'projectsTaskIndex',
-    'projects/:id/tasks/:id': 'projectsTaskIndex'
+    'projects/:id/tasks': 'projectTasksIndex',
+    'projects/:id/tasks/:id': 'projectTaskShow',
+    'tasks': 'tasksIndex',
+    'tasks/:id': 'taskShow'
   },
 
   root: function () {
@@ -80,15 +82,24 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   projectTasksIndex: function (id) {
     var project = this.projects.getOrFetch(id);
     $('.selected').removeClass('selected');
-    this._switchMainView(new Nexproc.Views.ProjectsIndex({ model: project }));
+    this._switchMainView(new Nexproc.Views.ProjectTasksIndex({ model: project }));
   },
 
-  // projectTaskShow: function (project_id, task_id) {
-  //   this._subViewHelper(true, this.projectsTasksIndex.bind(this, team_id));
-  //   this.taskShow(task_id, true);
-  // },
+  projectTaskShow: function (project_id, task_id) {
+    this._subViewHelper(true, this.projectsTasksIndex.bind(this, project_id));
+    var project = this._currentMainView.model;
+    var task = project.projects().getOrFetch(task_id);
+    var options = { model: task };
+    this._switchSubView(new Nexproc.Views.TaskShow(options));
+  },
 
-  // TODO: tasks routes
+  tasksIndex: function() {
+    $('.selected').removeClass('selected');
+    $('.task-tab').addClass('selected');
+    this.tasks.fetch();
+    var tvDex = new Nexproc.Views.TasksIndex({ collection: this.tasks });
+    this._switchMainView(tvDex);
+  },
 
   _switchSubView: function (view) {
     this._currentSubView && this._currentSubView.remove();

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :teams
     resources :memberships, only: [:create, :destroy]
     resources :projects, only: [:create, :destroy, :update, :show, :index]
+    resources :tasks, only: [:create, :update, :destroy, :show, :index]
   end
 
   root to: "static_pages#show"

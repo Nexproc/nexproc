@@ -9,7 +9,7 @@ class Api::MembershipsController < ApplicationController
   def create
     @member = User.find_by(username: params[:user][:name])
     if !@member
-      render json: "This is not the user you are looking for", status: 404;
+      error404("user")
     else
       team = Team.find(params[:team_id])
       team.members << @member

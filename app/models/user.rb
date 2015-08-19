@@ -1,13 +1,16 @@
 class User < ActiveRecord::Base
-  has_many :memberships, dependent: :destroy
-  has_many :teams, through: :memberships
-  has_many :projects, through: :teams
-
   attr_reader :password
+
   before_validation :create_session_token
   validates :username, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :username,  length: { minimum: 6, maximum: 16 }, uniqueness: true
+
+  has_many :memberships, dependent: :destroy
+  has_many :teams, through: :memberships
+  has_many :projects, through: :teams
+  has_many :tasks, through: :projects
+  has_many :assigned_tasks, class_name: "Task"
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

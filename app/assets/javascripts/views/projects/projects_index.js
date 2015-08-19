@@ -2,7 +2,7 @@ Nexproc.Views.ProjectsIndex = Backbone.CompositeView.extend({
   template: JST['main_content'],
   className: "panel panel-default",
   templateOptions: {
-    header: "Projects",
+    header: "Your Projects",
     list: "projects",
     button: null
   },
@@ -20,10 +20,10 @@ Nexproc.Views.ProjectsIndex = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click .list-group-item': "show_project"
+    'click .list-group-item': "showProject"
   },
 
-  show_project: function (e) {
+  showProject: function (e) {
     var url = 'projects/' + $(e.currentTarget).data("id");
     Backbone.history.navigate(url, {trigger: true});
   },

@@ -12,7 +12,7 @@ class Api::ProjectsController < ApplicationController
     if @project && current_user.projects.include?(@project)
       render :show
     else
-      render json: "This is not the project you are looking for", status: 404
+      error404("project")
     end
   end
 
@@ -27,16 +27,23 @@ class Api::ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project.update(team_params)
+    if @project && @project.update(team_params)
       render json: @project
-    else
+    elsif @project
       unprocessable(@project)
+    else
+      error404('project')
     end
   end
 
   def destroy
-    Project.find(params[:id]).destroy!
-    render json: {}
+    proj = Project.find(params[:id])
+    if proj
+      proj.destroy!
+      render json: {}
+    else
+      error404('project')
+    end
   end
 
   private

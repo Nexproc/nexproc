@@ -11,7 +11,7 @@ class Api::TeamsController < ApplicationController
     if @team && @team.members.include?(current_user)
       render :show
     else
-      render json: "This is not the team you are looking for.", status: 403
+      error404("team")
     end
   end
 
