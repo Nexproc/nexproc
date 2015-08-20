@@ -3,7 +3,7 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   className: "panel panel-default",
   templateOptions: {
     list: "tasks",
-    button: JST['tasks/delete_task']()
+    button: JST['tasks/task_dropdown']()
   },
 
   initialize: function (options) {
@@ -18,16 +18,16 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click .add-task': "newTask",
+    'click .create-task': "newTask",
     'click .delete-task': "deleteTask"
   },
 
   newTask: function () {
     var form = new Nexproc.Views.TaskForm({
-      project: this.model.project,
-      parent: this.model,
+      project: { id: this.model.project_id },
+      parentTask: this.model,
       model: new Nexproc.Models.Task(),
-      collection: this.project.tasks()
+      collection: this.model.tasks()
     });
     form.render();
   },

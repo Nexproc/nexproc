@@ -21,12 +21,15 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     // 'click .view-members' : 'show_members',
     'click .add-task': "new_task",
     'click .panel-title a' : 'showPage',
+    'click .list-group-item' : 'showPage',
     'click .delete-project': "delete_project"
   },
 
   showPage: function (e) {
     e.preventDefault();
-    var url = Backbone.history.fragment + "/tasks";
+    var taskUrl = "/" + $(e.currentTarget).data('id');
+    if (!$(e.currentTarget).data('id')) { taskUrl = ""; }
+    var url = "#projects/" + this.model.get('id') + "/tasks" + taskUrl;
     Backbone.history.navigate(url, { trigger: true });
   },
 

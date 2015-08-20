@@ -49,6 +49,15 @@ div.panel-heading .panel-title {
   float: right;
 }
 
+button.list-group-item.squared,
+.panel > .list-group:last-child .list-group-item.squared:last-child,
+.panel > .panel-collapse > .list-group:last-child .list-group-item.squared:last-child {
+  border-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin-bottom: 1px;
+}
+
 .panel > .list-group {
   background: $midgrey;
   max-height: 92%;

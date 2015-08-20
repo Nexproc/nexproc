@@ -3,7 +3,7 @@ Nexproc.Views.TaskForm = Backbone.ModalFormView.extend({
 
   initialize: function (options) {
     this.project = options.project;
-    this.task = options.task;
+    this.pTask = options.parentTask;
   },
 
   templateOptions: {
@@ -12,7 +12,14 @@ Nexproc.Views.TaskForm = Backbone.ModalFormView.extend({
   },
 
   formHelper: function (formData) {
-    formData.task.project_id = this.project.get('id');
-    if (this.task) { formData.task.parent_task_id = this.task.get('id'); }
+    var projectId;
+    if (this.pTask) {
+      formData.task.parent_task_id = this.pTask.get('id');
+      projectId = this.pTask.get('project_id');
+    } else {
+      projectId = this.project.get('id')
+    }
+
+    formData.task.project_id = projectId;
   }
 });
