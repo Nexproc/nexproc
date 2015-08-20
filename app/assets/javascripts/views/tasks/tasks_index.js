@@ -29,7 +29,7 @@ Nexproc.Views.TasksIndex = Backbone.CompositeView.extend({
   },
 
   addTView: function (task) {
-    var pView = new Nexproc.Views.TaskIndexItem({ model: task });
-    this.addSubview('ul#tasks.list-group', pView);
+    var tView = new Nexproc.Views.TasksIndexItem({ model: task });
+    this.addSubview('ul#tasks.list-group', tView);
   }
 });

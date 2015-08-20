@@ -7,7 +7,7 @@ Backbone.Collection = Backbone.Collection.extend({
 
     // set up dummy function in case no callback is needed
     var errorCallback = function () {};
-
+    
     if (!targetModel) {
       // generates a new instance of the model specified in your colleciton
       targetModel = new this.model({id: id});
@@ -18,7 +18,7 @@ Backbone.Collection = Backbone.Collection.extend({
         // if any fetchFailMethods are defined in your class, they will be
         // executed in the callback.
         // simply include a function called "fetchFailMethods"
-        // executes additional methods you wish to run.
+        // that executes additional methods you wish to run.
         that.fetchFailMethods && that.fetchFailMethods();
       };
     }

@@ -86,9 +86,9 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   },
 
   projectTaskShow: function (project_id, task_id) {
-    this._subViewHelper(true, this.projectsTasksIndex.bind(this, project_id));
+    this._subViewHelper(true, this.projectTasksIndex.bind(this, project_id));
     var project = this._currentMainView.model;
-    var task = project.projects().getOrFetch(task_id);
+    var task = project.tasks().getOrFetch(task_id);
     var options = { model: task };
     this._switchSubView(new Nexproc.Views.TaskShow(options));
   },
@@ -96,9 +96,14 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   tasksIndex: function() {
     $('.selected').removeClass('selected');
     $('.task-tab').addClass('selected');
-    this.tasks.fetch();
-    var tvDex = new Nexproc.Views.TasksIndex({ collection: this.tasks });
-    this._switchMainView(tvDex);
+    var tDex = new Nexproc.Views.TasksIndex({ collection: this.tasks });
+    this._switchMainView(tDex);
+  },
+
+  taskShow: function(id, keepView) {
+    var task = this.tasks.getOrFetch(id);
+    this._subViewHelper(keepView, this.projectsIndex);
+    this._switchSubView(new Nexproc.Views.TaskShow({ model: task }));
   },
 
   _switchSubView: function (view) {

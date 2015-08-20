@@ -8,8 +8,8 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.listenTo(this.model, 'sync', this.render);
-    // this.listenTo(this.model.tasks(), 'add', this.addTaskView);
-    // this.addChildren();
+    this.listenTo(this.model.tasks(), 'add', this.addTaskView);
+    this.addChildren();
   },
 
   preRender: function () {
@@ -19,7 +19,7 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
 
   events: {
     // 'click .view-members' : 'show_members',
-    // 'click .add-task': "new_task",
+    'click .add-task': "new_task",
     'click .panel-title a' : 'showPage',
     'click .delete-project': "delete_project"
   },
@@ -30,15 +30,14 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     Backbone.history.navigate(url, { trigger: true });
   },
 
-  // TODO: Create Tasks
-  // new_task: function () {
-  //   var form = new Nexproc.Views.TaskForm({
-  //     project: this.model,
-  //     model: new Nexproc.Models.Task(),
-  //     collection: this.project.tasks()
-  //   });
-  //   form.render();
-  // },
+  new_task: function () {
+    var form = new Nexproc.Views.TaskForm({
+      project: this.model,
+      model: new Nexproc.Models.Task(),
+      collection: this.project.tasks()
+    });
+    form.render();
+  },
 
   delete_project: function (e) {
     this.model.collection.remove(this.model);
@@ -57,20 +56,22 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
 
   addChildren: function () {
     // this.model.members().each( this.addMemView.bind(this) );
-    // this.model.tasks().each( this.addTaskView.bind(this) );
+    this.model.tasks().each( this.addTaskView.bind(this) );
   },
 
-  addMemView: function (member) {
-    var mView = new Nexproc.Views.MembersIndexItem({ model: member });
-    this.addSubview('ul#members.list-group', mView);
-  },
+  // addMemView: function (member) {
+  //   var mView = new Nexproc.Views.MembersIndexItem({ model: member });
+  //   this.addSubview('ul#members.list-group', mView);
+  // },
 
   addTaskView: function (task) {
     var tView = new Nexproc.Views.TasksIndexItem({ model: task });
     this.addSubview('ul#tasks.list-group', tView);
   },
 
-  delete_task: function (e) {
+  //TODO
+
+  deleteTask: function (e) {
     var that = this;
     var params = { project_id: this.model.id };
     this.model.members().destroy(this.model.id);

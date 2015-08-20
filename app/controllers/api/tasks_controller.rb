@@ -16,7 +16,7 @@ class Api::TasksController < ApplicationController
   end
 
   def create
-    @task = Tasks.new(task_params)
+    @task = Task.new(task_params)
     if @task.save
       render json: @task
     else

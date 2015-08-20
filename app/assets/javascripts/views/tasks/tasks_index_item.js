@@ -5,6 +5,6 @@ Nexproc.Views.TasksIndexItem = Backbone.View.extend({
   },
 
   preRender: function () {
-    this.templateOptions.project = this.model;
+    this.templateOptions.task = this.model;
   }
 });
