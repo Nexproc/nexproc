@@ -7,6 +7,7 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
+    this.model.fetch();
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.tasks(), 'add', this.addTaskView);
     this.model.tasks().each( this.addTaskView.bind(this) );
@@ -19,7 +20,14 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
 
   events: {
     'click .create-task': "newTask",
-    'click .delete-task': "deleteTask"
+    'click .delete-task': "deleteTask",
+    'click .list-group-item': 'showTask'
+  },
+
+  showTask: function (e) {
+    var url = Backbone.history.fragment.split("/").slice(0, -1).join("/");
+    url += "/" + $(e.currentTarget).data("id");
+    Backbone.history.navigate(url, { trigger: true });
   },
 
   newTask: function () {
@@ -33,11 +41,19 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   },
 
   deleteTask: function (e) {
-    this.model.collection.remove(this.model);
+    var urlFrag = this.taskDestroyHelper();
     this.model.destroy();
     this.remove();
     var url = Backbone.history.fragment.split("/").slice(0, -1).join("/");
-    Backbone.history.navigate(url);
+    Backbone.history.navigate(url + urlFrag, {trigger: urlFrag.length !== 0 });
+  },
+
+  taskDestroyHelper: function () {
+    if (this.model.collection) { this.model.collection.remove(this.model); }
+    var parentId = this.model.get("parent_task_id");
+    var urlFrag = "";
+    if (parentId) { urlFrag += "/" + parentId; }
+    return urlFrag;
   },
 
   addTaskView: function (task) {

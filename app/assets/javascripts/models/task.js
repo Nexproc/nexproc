@@ -9,9 +9,9 @@ Nexproc.Models.Task = Backbone.Model.extend({
   },
 
   parse: function (response) {
-    if (response.tasks) {
-      this.tasks().set(response.tasks);
-      delete response.tasks;
+    if (response.sub_tasks) {
+      this.tasks().set(response.sub_tasks);
+      delete response.sub_tasks;
     }
 
     return response;

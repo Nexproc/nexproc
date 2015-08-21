@@ -7,7 +7,6 @@ class Api::ProjectsController < ApplicationController
   end
 
   def show
-    #TODO: include tasks once they are created
     @project = Project.find(params[:id])
     if @project && current_user.projects.include?(@project)
       render :show

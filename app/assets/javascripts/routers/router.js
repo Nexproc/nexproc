@@ -87,7 +87,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   projectTaskShow: function (project_id, task_id) {
     this._subViewHelper(true, this.projectTasksIndex.bind(this, project_id));
-    var project = this._currentMainView.model;
+    var project = this._currentMainView.model || this._currentMainView.collection.get(project_id);
     var task = project.tasks().getOrFetch(task_id);
     var options = { model: task };
     this._switchSubView(new Nexproc.Views.TaskShow(options));

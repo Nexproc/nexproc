@@ -5,7 +5,7 @@ class Api::TasksController < ApplicationController
   def show
     @task = current_user.tasks.find(params[:id])
     if @task
-      render json: :show
+      render :show
     else
       error404("task")
     end

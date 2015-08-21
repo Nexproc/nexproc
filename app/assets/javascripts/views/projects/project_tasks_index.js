@@ -11,6 +11,7 @@ Nexproc.Views.ProjectTasksIndex = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'remove', this.removeTask);
     this.listenTo(this.collection, 'add', this.addTView.bind(this));
     this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.collection, 'sync', this.checkChildren)
     this.collection.each( this.addTView.bind(this) );
   },
 
@@ -38,12 +39,21 @@ Nexproc.Views.ProjectTasksIndex = Backbone.CompositeView.extend({
   },
 
   addTView: function (task) {
-    var tView = new Nexproc.Views.TasksIndexItem({ model: task });
+    if (task.get("parent_task_id")) { return; }
+    var tView = new Nexproc.Views.TasksIndexItem({ model: task, root: true });
     this.addSubview('ul#tasks.list-group', tView);
   },
 
   preRender: function () {
     var head = this.model.escape('name') + " Tasks";
     this.templateOptions.header = head;
+  },
+
+  checkChildren: function () {
+    this.model.tasks().each(this.notDirectChild.bind(this));
+  },
+
+  notDirectChild: function (task) {
+    if (task.get("parent_task_id")) { this.model.tasks().remove(task); }
   }
 });

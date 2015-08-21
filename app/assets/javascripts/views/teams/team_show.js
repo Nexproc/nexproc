@@ -82,7 +82,7 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     var that = this;
     var params = { team_id: this.model.id };
     this.model.members().destroy(this.model.id);
-    this.mainView.removeModelSubview('ul#teams.list-group', that.model);
+
     this.remove();
     Backbone.history.navigate('/teams');
   }
