@@ -20,4 +20,9 @@ class Api::MembershipsController < ApplicationController
       end
     end
   end
+
+  def index
+    @memberships = Membership.includes(:user).where(team_id: params[:team_id]);
+    render :index
+  end
 end

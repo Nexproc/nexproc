@@ -1,7 +1,7 @@
 Nexproc.Views.TasksIndexItem = Backbone.View.extend({
   template: JST['tasks/tasks_index_item'],
   initialize: function (options) {
-    this.listenTo(this.model, 'sync', this.render);
+    // this.listenTo(this.model, 'sync', this.render);
   },
 
   preRender: function () {

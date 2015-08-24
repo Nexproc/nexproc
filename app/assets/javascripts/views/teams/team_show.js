@@ -7,12 +7,10 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.mainView = options.mainView ? options.mainView : this;
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.model.members(), 'add', this.addMemView);
     this.listenTo(this.model.projects(), 'add', this.addProjView);
     this.listenTo(this.model.projects(), 'remove', this.removeProject);
-    this.addChildren();
+    this.model.projects().each( this.addProjView.bind(this) );
   },
 
   removeProject: function (project) {
@@ -58,19 +56,10 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
 
   showMembers: function () {
     var modal = new Nexproc.Views.TeamMembersModal({
-      team: this.model,
+      model: this.model,
       collection: this.model.members()
     });
-  },
-
-  addChildren: function () {
-    this.model.members().each( this.addMemView.bind(this) );
-    this.model.projects().each( this.addProjView.bind(this) );
-  },
-
-  addMemView: function (member) {
-    var tView = new Nexproc.Views.MembersIndexItem({ model: member });
-    this.addSubview('ul#members.list-group', tView);
+    modal.render();
   },
 
   addProjView: function (project) {
@@ -79,11 +68,8 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
   },
 
   leaveTeam: function (e) {
-    var that = this;
-    var params = { team_id: this.model.id };
-    this.model.members().destroy(this.model.id);
-
-    this.remove();
-    Backbone.history.navigate('/teams');
+    this.model.collection.remove(this.model);
+    this.destroy({ data: { team_id: this.model.id } });
+    Backbone.history.navigate('teams', { trigger: true });
   }
 });

@@ -8,13 +8,19 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model.tasks(), 'remove', this.removeTask);
     this.listenTo(this.model.tasks(), 'add', this.addTaskView);
+    this.listenTo(this.model.tasks(), 'sync', this.checkChildren);
     this.addChildren();
+  },
+
+  removeTask: function (task) {
+    this.removeModelSubview('ul#tasks.list-group', task);
   },
 
   preRender: function () {
     var head = "<a>" + this.model.escape('name') + "</a>";
-    this.templateOptions.header = head
+    this.templateOptions.header = head;
   },
 
   events: {
@@ -59,7 +65,7 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
   },
 
   checkChildren: function () {
-    this.model.tasks().each(this.notDirectChild.bind(this));
+    this.model.tasks().each( this.notDirectChild.bind(this) );
   },
 
   notDirectChild: function (task) {
