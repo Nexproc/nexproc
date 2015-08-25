@@ -18,11 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def create_session_token
-    self.session_token = SecureRandom.urlsafe_base64
+    self.session_token = SecureRandom.urlsafe_base64 unless self.session_token
   end
 
   def reset_session!
-    create_session_token
+    self.session_token = SecureRandom.urlsafe_base64
     save!
   end
 

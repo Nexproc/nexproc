@@ -34,6 +34,14 @@ class Api::TeamsController < ApplicationController
     end
   end
 
+  def destroy
+    team = current_user.teams.find(params[:id])
+    current_user.teams.delete(team)
+    current_user.save
+    team.destroy! if team.members.empty?
+    render json: {}
+  end
+
   private
   def team_params
     params.require(:team).permit(:name)
