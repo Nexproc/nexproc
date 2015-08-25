@@ -3,7 +3,7 @@ class Api::TasksController < ApplicationController
   before_action :can_access?
 
   def show
-    @task = current_user.tasks.find(params[:id])
+    @task = current_user.tasks.includes(project: {team: :members}).find(params[:id])
     if @task
       render :show
     else
@@ -27,7 +27,8 @@ class Api::TasksController < ApplicationController
   def update
     @task = current_user.tasks.find(params[:id])
     if @task
-      if @task.update
+      params[:task][:user_id] = current_user.id if task_params[:user_id] == -1
+      if @task.update(task_params)
         render json: @task
       else
         unprocessable(@task)

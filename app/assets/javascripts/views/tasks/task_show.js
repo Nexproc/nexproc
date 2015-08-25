@@ -10,6 +10,15 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
     this.model.fetch();
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.tasks(), 'add', this.addTaskView);
+    this.listenTo(this.model.members(), 'add', this.addMemView);
+    this.addChildren();
+  },
+
+  addMemViews: function() {
+    this.model.members().each( this.addMemView.bind(this) );
+  },
+
+  addChildren: function () {
     this.model.tasks().each( this.addTaskView.bind(this) );
   },
 
@@ -21,7 +30,9 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   events: {
     'click .create-task': "newTask",
     'click .delete-task': "deleteTask",
-    'click .list-group-item': 'showTask'
+    'click ul#tasks.list-group .list-group-item': 'showTask',
+    'click .edit-task': 'editTask',
+    'click ul#users.list-group .list-group-item': 'assignTask'
   },
 
   showTask: function (e) {
@@ -38,6 +49,20 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
       collection: this.model.tasks()
     });
     form.render();
+  },
+
+  editTask: function () {
+    var form = new Nexproc.Views.TaskForm({
+      project: { id: this.model.project_id },
+      model: this.model,
+      collection: this.model.tasks()
+    });
+    form.render();
+  },
+
+  assignTask: function (e) {
+    var userid = $(e.currentTarget).children().data('id');
+    this.model.save({ user_id: userid });
   },
 
   deleteTask: function (e) {
@@ -59,5 +84,10 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   addTaskView: function (task) {
     var tView = new Nexproc.Views.TasksIndexItem({ model: task });
     this.addSubview('ul#tasks.list-group', tView);
+  },
+
+  addMemView: function (member) {
+    var mView = new Nexproc.Views.MembersIndexItem({ model: member });
+    this.addSubview('ul#users.list-group', mView);
   }
 });

@@ -36,10 +36,21 @@ div.form-input {
   border-bottom-left-radius: 0;
 }
 
+.btn.btn-success.alt {
+  float: left;
+  width: 100%;
+}
+
 .modal-body * {
   color: black;
 }
 
 div.form-input input {
   color: black;
+}
+
+.list-group.dropdown-menu * {
+  overflow-y: scroll;
+  color: black;
+  border: none;
 }
