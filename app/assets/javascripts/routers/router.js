@@ -87,7 +87,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   projectTaskShow: function (project_id, task_id) {
     this._subViewHelper(true, this.projectTasksIndex.bind(this, project_id));
-    var project = this._currentMainView.model || this._currentMainView.collection.get(project_id);
+    var project = this._projectFinder(project_id);
     var task = project.tasks().getOrFetch(task_id);
     var options = { model: task };
     this._switchSubView(new Nexproc.Views.TaskShow(options));
@@ -104,6 +104,19 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     var task = this.tasks.getOrFetch(id);
     this._subViewHelper(keepView, this.projectsIndex);
     this._switchSubView(new Nexproc.Views.TaskShow({ model: task }));
+  },
+
+  _projectFinder: function (project_id) {
+    var project = this._currentMainView.model;
+    if (this._isProject(project)) return project;
+    project = this._currentMainView.collection.get(project_id);
+    if (this._isProject(project)) return project;
+    project = this._currentSubView.model;
+    if (this._isProject(project)) return project;
+  },
+
+  _isProject: function (project) {
+    return project && project.constructor.prototype.urlRoot === "/api/projects";
   },
 
   _switchSubView: function (view) {

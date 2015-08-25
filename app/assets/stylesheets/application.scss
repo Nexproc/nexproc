@@ -19,10 +19,11 @@
 
 .whole {
   background-color: $subgrey;
+  background-image: url(http://www.transparenttextures.com/patterns/hexellence.png);
 }
 
-.whole::after {
-  background-image: $honeyback;
+.whole * :not(.glyphicon) {
+  font-family: 'Lato', sans-serif;
 }
 
 *:focus {
