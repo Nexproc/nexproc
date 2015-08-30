@@ -11,13 +11,14 @@ Nexproc.Views.TaskForm = Backbone.ModalFormView.extend({
   },
 
   formHelper: function (formData) {
+    var projectId;
     if (this.pTask) {
       formData.task.parent_task_id = this.pTask.get('id');
       projectId = this.pTask.get('project_id');
     } else {
       if(!this.model.get('project_id')) projectId = this.project.get('id');
     }
-    if (projectId) formData.task.project_id = projectId;
+    if (!!projectId) formData.task.project_id = projectId;
   },
 
   preRender: function () {

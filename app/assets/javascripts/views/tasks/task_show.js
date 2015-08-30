@@ -11,15 +11,11 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.tasks(), 'add', this.addTaskView);
     this.listenTo(this.model.members(), 'add', this.addMemView);
-    this.addChildren();
+    this.model.tasks().each( this.addTaskView.bind(this) );
   },
 
   addMemViews: function() {
     this.model.members().each( this.addMemView.bind(this) );
-  },
-
-  addChildren: function () {
-    this.model.tasks().each( this.addTaskView.bind(this) );
   },
 
   preRender: function () {
@@ -82,6 +78,7 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   },
 
   addTaskView: function (task) {
+    if (task.get('id') == this.model.get('id')) return;
     var tView = new Nexproc.Views.TasksIndexItem({ model: task });
     this.addSubview('ul#tasks.list-group', tView);
   },
