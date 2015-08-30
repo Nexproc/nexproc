@@ -25,6 +25,11 @@
 .whole * :not(.glyphicon) {
   font-family: 'Lato', sans-serif;
   word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+a {
+  cursor: pointer;
 }
 
 *:focus {
