@@ -34,7 +34,14 @@ html, .whole, #wrapper, #sidebar-wrapper, .container-fluid,
   height: 100%;
 }
 
+.list-group-item {
+  max-width: 100%;
+  width: 100%;
+  transition: all 0.5s;
+}
+
 .list-group-item.selected {
+  max-width: 105%;
   width: 105%;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
