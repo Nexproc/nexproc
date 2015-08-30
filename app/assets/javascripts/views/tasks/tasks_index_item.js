@@ -4,6 +4,16 @@ Nexproc.Views.TasksIndexItem = Backbone.View.extend({
     this.listenTo(this.model, 'sync', this.render);
   },
 
+  events: {
+    'click .complete': 'completeTask'
+  },
+
+  completeTask: function (e) {
+    this.remove();
+    this.model.collection.remove(this.model);
+    this.model.destroy();
+  },
+
   preRender: function () {
     this.templateOptions.task = this.model;
   }

@@ -1,5 +1,5 @@
 Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
-  template: JST['main_content'],
+  template: JST['main_content_with_description'],
   className: "panel panel-default",
   templateOptions: {
     list: "tasks",
@@ -23,8 +23,8 @@ Nexproc.Views.TaskShow = Backbone.CompositeView.extend({
   },
 
   preRender: function () {
-    var head = this.model.escape('name');
-    this.templateOptions.header = head;
+    this.templateOptions.header = this.model.escape('name');
+    this.templateOptions.description = this.model.escape('body');
   },
 
   events: {

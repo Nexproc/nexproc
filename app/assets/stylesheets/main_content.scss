@@ -24,7 +24,7 @@ div#main.container-fluid.top-pad {
 
 .panel-default > div.panel-heading {
   color: white;
-  height: 80px;
+  height: 5em;
   background-color: $infocolor;
   border-color: darken($infocolor, 5%);
 }
@@ -37,8 +37,21 @@ div.panel.panel-default {
   overflow-y: hidden;
 }
 
+.complete {
+  float: right;
+}
+
+.content-body > div.content-title {
+  color: $midgrey;
+  font-size: 1.3em;
+  margin: .5em 1em;
+  padding: 0em .5em;
+  border-radius: 3px;
+  background-color: darken(white, 10%);
+}
+
 div.panel-heading .panel-title {
-  font-size: 30px;
+  font-size: 2em;
   float: left;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -49,12 +62,20 @@ div.panel-heading .panel-title {
   float: right;
 }
 
-button.list-group-item.squared,
+button.list-group-item.squared {
+  content: " ";
+  clear: both;
+}
+
+.list-group-item.squared,
 .panel > .list-group:last-child .list-group-item.squared:last-child,
+.panel > button.list-group-item.squared:first-child, .panel > button.list-group-item.squared:last-child,
 .panel > .panel-collapse > .list-group:last-child .list-group-item.squared:last-child {
   border-radius: 0px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
   margin-bottom: 1px;
 }
 

@@ -18,12 +18,13 @@
 @import "buttons";
 
 .whole {
-  background-color: $subgrey;
+  background-color: darken($subgrey, 20%);
   background-image: url(http://www.transparenttextures.com/patterns/hexellence.png);
 }
 
 .whole * :not(.glyphicon) {
   font-family: 'Lato', sans-serif;
+  word-wrap: break-word;
 }
 
 *:focus {
