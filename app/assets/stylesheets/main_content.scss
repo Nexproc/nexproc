@@ -25,7 +25,11 @@ div#main.container-fluid.top-pad {
 .panel-default > div.panel-heading {
   color: white;
   height: 5em;
-  background-color: $infocolor;
+  background: linear-gradient(
+  to bottom,
+  darken($infocolor, 8%),
+  $infocolor,
+  $infocolor);
   border-color: darken($infocolor, 5%);
 }
 
@@ -55,6 +59,15 @@ div.panel-heading .panel-title {
   float: left;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+  max-width: 70%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+div.panel-heading .panel-title a {
+  border: .125em solid darken(white, 10%);
+  padding: 0em 0.25em;
+  background: linear-gradient(to top, darken($infocolor, 9%) , $infocolor);
 }
 
 .content-head {
@@ -65,6 +78,12 @@ div.panel-heading .panel-title {
 button.list-group-item.squared {
   content: " ";
   clear: both;
+  background: linear-gradient(to right, darken(white, 25%), transparentize(white, 1));
+  background-color: white;
+  transition: all 0.5s;
+  &:hover, &:active, &:focus {
+    background-color: darken(white, 25%);
+  }
 }
 
 .list-group-item.squared,
@@ -84,6 +103,7 @@ button.list-group-item.squared {
   max-height: 92%;
   overflow-y: scroll;
 }
+
 div.panel.panel-default > .list-group::-webkit-scrollbar {
   background: subgrey;
   width: 0;

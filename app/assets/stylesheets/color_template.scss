@@ -8,6 +8,9 @@ $fifth: #0CE773;
 $maingrey: #555555;
 $subgrey: #d2d2d2;
 $midgrey: #929292;
-$shadowgrey: darken(#888888, 20%);
 $honeyback: url("honey_im_subtle.png");
 $concreteback: url("concrete_seamless.png");
+
+//original scheme alts
+$shadowgrey: darken(#888888, 20%);
+$tsubgrey: transparentize($subgrey, 0.4);

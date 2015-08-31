@@ -18,8 +18,8 @@
 @import "buttons";
 
 .whole {
-  background-color: darken($subgrey, 20%);
-  background-image: url(http://www.transparenttextures.com/patterns/hexellence.png);
+  background-image: linear-gradient(to right, $tsubgrey, darken($tsubgrey, 60%)),
+  url(http://www.transparenttextures.com/patterns/hexellence.png);
 }
 
 .whole * :not(.glyphicon) {
