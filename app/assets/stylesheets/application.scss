@@ -17,10 +17,20 @@
 @import "bootstrap";
 @import "buttons";
 
+html {
+  min-width: 1000px;
+  min-height: 350px;
+  height: 100%;
+  overflow: auto;
+}
+
 .whole {
   background-image: linear-gradient(to right, $tsubgrey, darken($tsubgrey, 60%)),
   url(http://www.transparenttextures.com/patterns/hexellence.png);
   overflow: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .whole * :not(.glyphicon) {

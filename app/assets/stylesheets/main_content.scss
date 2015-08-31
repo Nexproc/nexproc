@@ -8,14 +8,12 @@ div.container-fluid.no-pad {
 #page-content-wrapper {
   z-index: 0;
   height: 100%;
-  max-height: 100%;
-  float: left;
-  width: 83.5%;
+  float: right;
+  width: 83%;
 }
 
 div#main.container-fluid.top-pad {
   float: left;
-  // position: relative;
   padding-bottom: 10px;
   padding-top: 10px;
   height: 100%;
