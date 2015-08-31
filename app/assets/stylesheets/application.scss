@@ -20,6 +20,7 @@
 .whole {
   background-image: linear-gradient(to right, $tsubgrey, darken($tsubgrey, 60%)),
   url(http://www.transparenttextures.com/patterns/hexellence.png);
+  overflow: hidden;
 }
 
 .whole * :not(.glyphicon) {

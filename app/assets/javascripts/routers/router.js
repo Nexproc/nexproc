@@ -126,14 +126,30 @@ Nexproc.Routers.Router = Backbone.Router.extend({
   },
 
   _switchMainView: function (view) {
+    var cback = function () {};
+    if(!this._currentMainView) {
+      cback = function(v) { v.$el.animate({"marginLeft": '+=150%', 'marginRight': '-=150%'}, 500); };
+    }
     this._removeViews();
     this._currentMainView = view;
-    this.$mainEl.html(view.render().$el);
+    this.$mainEl.append(view.render().$el);
+    view.$el.animate({"marginLeft": '-=150%', 'marginRight': '+=150%'}, 0);
+    cback(view);
   },
 
   _removeViews: function () {
     this._currentSubView && this._currentSubView.remove();
-    this._currentMainView && this._currentMainView.remove();
+    this._currentMainView && this._mainRemoveHandler();
+  },
+
+  _mainRemoveHandler: function (view) {
+    var that = this;
+    var oldView = this._currentMainView;
+    var removal = function () {
+      that._currentMainView.$el.animate({"marginLeft": '+=150%', 'marginRight': '-=150%'}, 500);
+      oldView.remove();
+    };
+    oldView.$el.animate({"marginLeft": '-=150%', 'marginRight': '+=150%'}, {duration: 500, complete: removal});
   },
 
   _subViewHelper: function (keepView, cback) {

@@ -22,6 +22,11 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     this.templateOptions.header = head;
   },
 
+  postRender: function () {
+    this.$('.panel-title').addClass('linked');
+    Backbone.CompositeView.prototype.postRender.call(this);
+  },
+
   showPage: function (e) {
     e.preventDefault();
     var url = Backbone.history.fragment + "/projects";

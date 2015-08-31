@@ -24,6 +24,11 @@ Nexproc.Views.ProjectShow = Backbone.CompositeView.extend({
     this.templateOptions.description = this.model.escape('description');
   },
 
+  postRender: function () {
+    this.$('.panel-title').addClass('linked');
+    Backbone.CompositeView.prototype.postRender.call(this);
+  },
+
   events: {
     'click .add-task': "new_task",
     'click .panel-title a' : 'showPage',
