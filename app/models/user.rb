@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   before_validation :create_session_token
   validates :username, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6 }, allow_nil: true
-  validates :username,  length: { minimum: 6, maximum: 16 }, uniqueness: true
+  validates :username, uniqueness: true
 
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships

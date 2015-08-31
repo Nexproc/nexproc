@@ -38,7 +38,13 @@ Nexproc.Views.TeamShow = Backbone.CompositeView.extend({
     'click .view-members' : 'showMembers',
     'click .create-project': 'newProject',
     'click .add-member': "newMember",
-    'click .leave-team': "leaveTeam"
+    'click .leave-team': "leaveTeam",
+    'click .list-group-item': 'showProject'
+  },
+
+  showProject: function (e) {
+    var projId = $(e.currentTarget).data("id");
+    Backbone.history.navigate("projects/" + projId + "/tasks", {trigger: true});
   },
 
   newProject: function () {

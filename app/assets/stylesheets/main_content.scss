@@ -25,10 +25,11 @@ div#main.container-fluid.top-pad {
   color: white;
   height: 5em;
   background: linear-gradient(
-  to bottom,
-  darken($infocolor, 8%),
-  $infocolor,
-  $infocolor);
+    to bottom,
+    darken($infocolor, 8%),
+    $infocolor,
+    $infocolor
+  );
   border-color: darken($infocolor, 5%);
 }
 

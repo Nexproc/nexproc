@@ -6,21 +6,34 @@
     <%= auth_token %>
     <div class="unpadded-input-group">
       <div class="form-group">
-        <input type="text" class="form-control" name="user[username]"
+        <input type="text" id="username-input" class="form-control" name="user[username]"
         value="<%=@user.username%>" placeholder="Username">
       </div>
       <div class="form-group">
-        <input class="form-control" type="password" name="user[password]" placeholder="Password">
+        <input class="form-control" type="password" id="password"
+        name="user[password]" placeholder="Password">
       </div>
     </div>
     <br>
     <div class="form-group" id="new-session">
-      <button type="submit" class="btn btn-info form-control"><%= btn %></button>
+      <button type="submit" id="go" class="btn btn-info form-control"><%= btn %></button>
     </div>
     <% if btn == "Log In!" %>
+      <div class="form-group" id="guest-login">
+        <%= link_to '<div class="btn btn-success form-control">Guest Sign In</div>'.html_safe%>
+      </div>
       <div class="form-group" id="new-user">
         <%= link_to '<div class="btn btn-danger form-control">Sign Up</div>'.html_safe, new_user_url %>
+      </div>
+    <% else %>
+      <div class="form-group">
+        <%= link_to '<div class="btn btn-success form-control">Return to Login</div>'.html_safe, new_sessions_url%>
       </div>
     <% end %>
   </form>
 </div>
+<script>
+  $(document).ready(function(){
+    Guest.initialize();
+  });
+</script>

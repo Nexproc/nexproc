@@ -23,6 +23,8 @@
   color: $subgrey;
   font-weight: bold;
   font-size: 2em;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .sidebar .logo {
