@@ -8,14 +8,6 @@
       <textarea name="task[body]" value="<%=task.escape('body')%>"
       placeholder="Task Description" class="form-control"></textarea>
     </div>
-    <div class="form-group">
-      <input type="date" class="form-control"
-      value="<%=task.escape('start_date')%>" name="task[start_date]">
-    </div>
-    <div class="form-group">
-      <input type="date" value="<%=task.escape('due_date')%>" name="task[due_date]"
-      class="form-control">
-    </div>
   </div>
   <br>
   <button type="submit" class="btn btn-success alt">Save Task</button>
