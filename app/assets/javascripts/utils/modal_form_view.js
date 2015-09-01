@@ -21,11 +21,14 @@ Backbone.ModalFormView = Backbone.View.extend ({
     this.remove();
   },
 
+  failback: function () {},
+
   createItem: function (e) {
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON();
     this.formHelper && this.formHelper(formData);
     this.model.save(formData, {
+      error: this.failback,
       success: function (member) {
         this.collection.add(member);
       }.bind(this)

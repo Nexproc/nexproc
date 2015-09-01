@@ -9,6 +9,11 @@ Nexproc.Views.MemberForm = Backbone.ModalFormView.extend({
     this.team = options.team;
   },
 
+  failback: function (model, response) {
+    err = new Nexproc.Views.ErrorView(response.responseText, response.status);
+    err.render();
+  },
+
   formHelper: function (formData) {
     formData.team_id = this.team.get('id');
   }
