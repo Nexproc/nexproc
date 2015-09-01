@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error404(object)
-    errstring = "This is not the " + object + "you were looking for."
+    errstring = "This is not the " + object + " you were looking for."
     render json: errstring, status: 404
   end
 end
