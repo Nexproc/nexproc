@@ -33,7 +33,7 @@ Go forth! Destroy your foes! Or... bake a cake. Anything is possible using [Nexp
 * Chrome
 * Safari
 * Firefox
-* Internet Exploder
+* Internet ~~Explorer~~ Exploder
 
 ### Database Tables
 * Users
