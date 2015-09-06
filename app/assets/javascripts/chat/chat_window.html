@@ -1,0 +1,22 @@
+<div class="messenger">
+  <h3>Messenger</h3>
+  <ul id="messages"></ul>
+  <form class="messenger" action="">
+      <input id="m" autocomplete="off" />
+      <button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      $('.messenger').submit(function () {
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+
+      socket.on('chat message', function (msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+    </script>
+</div>

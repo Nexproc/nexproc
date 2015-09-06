@@ -1,0 +1,8 @@
+{
+  "name": "nexproc-chat-application",
+  "version": "0.0.1",
+  "description": "a team-wide chat app written in Node.js",
+  "dependencies": {
+    "socket.io": "^1.3.6"
+  }
+}

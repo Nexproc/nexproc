@@ -17,6 +17,7 @@
 //= require underscore
 //= require backbone
 //= require nexproc
+//= require_tree ./chat
 //= require_tree ./utils
 //= require_tree ../templates
 //= require_tree ./models
