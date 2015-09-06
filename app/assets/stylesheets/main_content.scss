@@ -87,9 +87,10 @@ button.list-group-item.squared {
 }
 
 .list-group-item.squared,
-.panel > .list-group:last-child .list-group-item.squared:last-child,
-.panel > button.list-group-item.squared:first-child, .panel > button.list-group-item.squared:last-child,
-.panel > .panel-collapse > .list-group:last-child .list-group-item.squared:last-child {
+.panel > .list > .list-group:last-child .list-group-item.squared:last-child,
+.panel > .list > button.list-group-item.squared:first-child,
+.panel > .list > button.list-group-item.squared:last-child,
+.panel > .panel-collapse > .list > .list-group:last-child .list-group-item.squared:last-child {
   border-radius: 0px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -98,13 +99,8 @@ button.list-group-item.squared {
   margin-bottom: 1px;
 }
 
-.panel > .list-group {
+div.list {
   background: $midgrey;
-  max-height: 92%;
-  overflow-y: scroll;
-}
-
-div.panel.panel-default > .list-group::-webkit-scrollbar {
-  background: subgrey;
-  width: 0;
+  height: 90%;
+  overflow-y: auto;
 }

@@ -12,7 +12,7 @@ div.modal-content {
 .m-background {
   z-index: 2;
   background: rgba(92, 88, 88, 0.6);
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -41,8 +41,12 @@ div.form-input {
   width: 100%;
 }
 
-.modal-body * {
-  color: black;
+.modal-body {
+  max-height: 12em;
+  overflow-y: auto;
+  * {
+    color: black;
+  }
 }
 
 div.form-input input {
