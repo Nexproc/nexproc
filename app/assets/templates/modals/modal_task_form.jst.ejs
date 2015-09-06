@@ -5,8 +5,9 @@
       name="task[name]" value="<%=task.escape('name')%>" placeholder="New Task Name">
     </div>
     <div class="form-group">
-      <textarea name="task[body]" value="<%=task.escape('body')%>"
-      placeholder="Task Description" class="form-control"></textarea>
+      <textarea type="textarea" name="task[body]"
+      placeholder="Task Description"
+      class="form-control"><%=task.escape('body')%></textarea>
     </div>
   </div>
   <br>
