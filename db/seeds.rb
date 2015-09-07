@@ -4,15 +4,13 @@ guest = User.new( username: "GuestUser", password: "password" )
 guest.save
 
 #seed fake users
-100.times do
-  i = 1
-  while i < 100
-    user = User.new(
-      username: Faker::Name.first_name,
-      password: "password"
-      )
-    i += 1 if user.save
-  end
+i = 1
+while i < 100
+  user = User.new(
+    username: Faker::Name.first_name,
+    password: "password"
+    )
+  i += 1 if user.save
 end
 
 #seed teams
