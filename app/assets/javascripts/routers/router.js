@@ -13,7 +13,7 @@ Nexproc.Routers.Router = Backbone.Router.extend({
 
   //chat stuff
   teamSelection: function(e){
-    var teamModal = new Nexproc.Views.TeamSelection({collection: this.teams});
+    var teamModal = new Nexproc.Views.TeamSelection({ collection: this.teams });
   },
 
   toggleChat: function(e){

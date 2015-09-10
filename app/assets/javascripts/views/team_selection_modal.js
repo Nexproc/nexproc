@@ -12,8 +12,8 @@ Nexproc.Views.TeamSelection = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.collection.fetch();
-    this.listenTo(this.collection, 'add', this.addMemView);
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'add', this.addTeamView.bind(this));
+    this.listenTo(this.collection, 'sync', this.render.bind(this));
     this.collection.each(this.addTeamView.bind(this));
   },
 
