@@ -18,8 +18,8 @@ Nexproc.Views.TeamSelection = Backbone.CompositeView.extend({
   },
 
   fireChange: function (e) {
-    var teamid = $(e.currentTarget).data("id");
-    $("body").trigger("changeroom", teamid);
+    var $team = $(e.currentTarget);
+    $("body").trigger("changeroom", [$team.data("id"), $team.text()]);
   },
 
   removeBtn: function (e) {

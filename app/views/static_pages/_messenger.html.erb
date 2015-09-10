@@ -1,5 +1,6 @@
+<% start_team = current_user.teams[0] %>
 <div class="messenger hiding">
-  <%=render "messenger_nav"%>
+  <%=render "messenger_nav", team_name: (start_team ? start_team.name : "")  %>
   <ul id="messages"></ul>
   <form class="message" action="">
     <input id="m" class="form-control" autocomplete="off" /><button class="btn btn-success">Send</button>
@@ -24,18 +25,18 @@
         socket.disconnect();
       });
 
-      $("body").on("changeroom", function (e, teamid) {
+      $("body").on("changeroom", function (e, teamid, okay) {
         socket.emit("switch team", teamid);
+        $("#teamswitch").text(okay);
       });
 
-      socket.on('update room', function (room) {
-        alert(room);
+      socket.on('update room', function (room, teamName) {
+        // $("#teamswitch").text(teamName);
       });
 
       socket.on('user info request', function () {
-        <% team = current_user.teams[0] %>
         var username = "<%= current_user.username.to_s %>";
-        var team_id = "<%= !!team ? team.id : team %>";
+        var team_id = "<%= !!start_team ? start_team.id : start_team %>";
         socket.emit('user info response', username, team_id);
       });
 
