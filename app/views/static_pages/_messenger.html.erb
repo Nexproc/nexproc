@@ -25,9 +25,13 @@
         socket.disconnect();
       });
 
-      $("body").on("changeroom", function (e, teamid, okay) {
-        socket.emit("switch team", teamid);
-        $("#teamswitch").text(okay);
+      $("body").on("changeroom", function (e, teamid, teamName) {
+        var currentTeam = $("#teamswitch").text();
+        if(currentTeam !== teamName) {
+          socket.emit("switch team", teamid);
+          $("#teamswitch").text(teamName);
+          $("#messages").empty();
+        }
       });
 
       socket.on('update room', function (room, teamName) {
