@@ -7,6 +7,25 @@ Nexproc.Routers.Router = Backbone.Router.extend({
     this.tasks = new Nexproc.Collections.Tasks();
     this._mainViewSwitch = true;
     this._subViewSwitch = true;
+    $("#teamswitch").on("click", this.teamSelection.bind(this));
+    $("#chathide").on("click", this.toggleChat.bind(this));
+  },
+
+  //chat stuff
+  teamSelection: function(e){
+    var teamModal = new Nexproc.Views.TeamSelection({collection: this.teams});
+  },
+
+  toggleChat: function(e){
+    $button = $(e.currentTarget);
+    $messenger = $button.parent().parent();
+    if($messenger.attr("class").includes("hiding")) {
+      $messenger.removeClass("hiding").addClass("shown");
+      $button.text("Hide Chat");
+    } else if($messenger.attr("class").includes("shown")) {
+      $messenger.removeClass("shown").addClass("hiding");
+      $button.text("Show Chat");
+    }
   },
 
   routes: {

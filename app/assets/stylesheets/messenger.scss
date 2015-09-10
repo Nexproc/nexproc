@@ -1,41 +1,99 @@
+@import "color_template";
+
+.messenger {
+  right: 10em;
+  height: 20em;
+  width: 18em;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  border-top-left-radius: 3px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.messenger.shown {
+  bottom: 0;
+}
+
+.messenger.hiding {
+  bottom: -17em;
+}
+
+#teamswitch {
+  float: left;
+}
+
+#chathide {
+  float: right;
+  width: 50%;
+}
+
+.messenger-nav-bar {
+  top: 0;
+  background-color: $maingrey;
+  width: 100%;
+  padding: 0.25em;
+  height: 3em;
+}
 
 .message {
   background: #000;
-  padding: 3px;
-  position: fixed;
+  padding: 0.25em;
+  float: left;
   bottom: 0;
+  height: 3em;
   width: 100%;
 }
 
 .message input {
+  float:left;
   border: 0;
-  padding: 10px;
-  width: 90%;
+  width: 66%;
   margin-right: .5%;
 }
 
 .message button {
-  width: 9%;
-  background: rgb(130, 224, 255);
-  border: none;
-  padding: 10px;
+  float: right;
+  width: 25%;
 }
 
 #messages {
-  background: #eee;
+  height: 14em;
   border-radius: 3px;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-bottom: 10px;
-  margin-left: 5px;
-  width: 40%;
-  left: 0;
+  width: 100%;
+  overflow-y: auto;
 }
 
 #messages li {
-  padding: 5px 10px;
+  margin: 0em 0.5em;
+  margin-top: 0.5em;
+  padding: .5em 1.7em;
+  min-width: 40%;
+  max-width: 95%;
+  border-width: 1px;
+  border-style: solid;
+
+  &:last-child {
+    margin-bottom: 0.5em;
+  }
 }
-// #messages li:nth-child(odd) {
-//   background: #eee;
-// }
+
+#messages li.other {
+  float: left;
+  margin-right: 15%;
+  background: $subgrey;
+  border-color: $maingrey;
+  border-radius: 20px;
+}
+
+#messages li.self {
+  float: right;
+  margin-left: 15%;
+  background: lighten($infocolor, 40%);
+  border-color: $infocolor;
+  border-radius: 20px;
+}

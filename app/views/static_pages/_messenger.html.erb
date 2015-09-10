@@ -1,19 +1,48 @@
-<div class="messenger" style="bottom:0;right:0;height:20%;width:100%;position:fixed;z-index:100;background-color:white;">
+<div class="messenger hiding">
+  <%=render "messenger_nav"%>
   <ul id="messages"></ul>
   <form class="message" action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
+    <input id="m" class="form-control" autocomplete="off" /><button class="btn btn-success">Send</button>
   </form>
-  <script src="http://agile-forest-2507.herokuapp.com/socket.io/socket.io.js"></script>
+  <script src="http://nexprochat.herokuapp.com/socket.io/socket.io.js"></script>
   <script>
-    var socket = io.connect("http://agile-forest-2507.herokuapp.com/");
-    $('.message').submit(function (e) {
-      e.preventDefault();
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      // return false;
-    });
-    socket.on('chat message', function (msg){
-      $('#messages').append($('<li>').text(msg));
+    $(function () {
+      var socket = io.connect("http://nexprochat.herokuapp.com/");
+
+      $('.message').submit(function (e) {
+        e.preventDefault();
+        socket.emit('chat message', $('#m').val());
+        //mark message as your own message and append it to the div
+        var $message = $('<li>').addClass("self").text("You: " + $('#m').val());
+        $('#messages').append($message);
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+        $('#m').val('');
+      });
+
+      $('.logout').on('click', function () {
+        socket.emit('disconnect');
+        socket.disconnect();
+      });
+
+      $("body").on("changeroom", function (e, teamid) {
+        socket.emit("switch team", teamid);
+      });
+
+      socket.on('update room', function (room) {
+        alert(room);
+      });
+
+      socket.on('user info request', function () {
+        <% team = current_user.teams[0] %>
+        var username = "<%= current_user.username.to_s %>";
+        var team_id = "<%= !!team ? team.id : team %>";
+        socket.emit('user info response', username, team_id);
+      });
+
+      socket.on('chat message', function (msg) {
+        $('#messages').append($('<li class="other">').text(msg));
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+      });
     });
   </script>
 </div>

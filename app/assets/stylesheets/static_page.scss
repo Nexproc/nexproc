@@ -37,10 +37,12 @@ html, .whole, #wrapper, #sidebar-wrapper, .container-fluid,
   height: 100%;
 }
 
-a.list-group-item {
+a.list-group-item, a.list-group-item:first-child, a.list-group-item:last-child {
   max-width: 100%;
   width: 100%;
   transition: 0.5s;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
 }
 
 a.list-group-item.selected {

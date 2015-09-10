@@ -20,17 +20,20 @@
 }
 
 .btn-warn {
+  color: white;
   background-color: $warncolor;
   border-color: darken($warncolor, 10%);
 }
 
 .btn-warn:active, .btn-warn.active, .btn-warn.hover, .btn-warn:hover {
+  color: white;
   background-color: darken($warncolor, 10%);
   border-color: darken($warncolor, 15%);
 }
 
 .btn-warn:focus, .btn-warn:active:focus, .btn-warn:active:focus:hover,
 .btn-warn:active:hover {
+  color: white;
   background-color: darken($warncolor, 15%);
   border-color: darken($warncolor, 20%);
 }
