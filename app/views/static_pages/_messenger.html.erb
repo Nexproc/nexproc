@@ -14,7 +14,7 @@
         e.preventDefault();
         socket.emit('chat message', $('#m').val());
         //mark message as your own message and append it to the div
-        var $message = $('<li>').addClass("self").text("You: " + $('#m').val());
+        var $message = $('<li>').addClass("self").text($('#m').val());
         $('#messages').append($message);
         $('#messages').scrollTop($('#messages').prop('scrollHeight'));
         $('#m').val('');
